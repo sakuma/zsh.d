@@ -8,14 +8,25 @@ export MANPATH=/opt/local/share/man:$MANPATH
 # rvm (Ruby Version Manager)
 if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rvm ; fi
 
+function gemdir {
+  if [[ -z "$1" ]] ; then
+		echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
+	else
+    rvm "$1"
+    cd $(rvm gemdir)
+    pwd
+  fi
+}
+
 export EDITOR=vim
 
 # Short Cuts
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -A'
-alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems'
-alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems'
+# same -> % gemdir system 
+alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
+# alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems; pwd'
 alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias emal='emacsclient'
 alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
