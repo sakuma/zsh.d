@@ -8,15 +8,36 @@ export MANPATH=/opt/local/share/man:$MANPATH
 # rvm (Ruby Version Manager)
 if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rvm ; fi
 
-function gemdir {
+# function gemdir {
+#   if [[ -z "$1" ]] ; then
+# 		echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
+# 	else
+#     rvm "$1"
+#     cd $(rvm gemdir)
+#     pwd
+#   fi
+# }
+
+function cd_gem_dir {
   if [[ -z "$1" ]] ; then
 		echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
 	else
-    rvm "$1"
-    cd $(rvm gemdir)
+		cd $(rvm gemdir $1)
     pwd
   fi
 }
+
+# function rvm_use {
+# 		if [ -z "$1" ]; then
+# 				echo "Ruby interpreter expects a parameter, which should be a valid RVM Ruby selector"
+# 				echo "ex) % ru jruby"
+# 		elif rvm use $1 ;then
+# 				RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+# 		else
+# 				echo "or 'rvm list' "
+# 		fi
+# }
+
 
 export EDITOR=vim
 
@@ -25,7 +46,8 @@ alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -A'
 # same -> % gemdir system 
-alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
+# alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
+alias cdg=cd_gem_dir
 # alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems; pwd'
 alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias emal='emacsclient'
@@ -33,8 +55,11 @@ alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
 alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
 alias taif='tail -f'
 
-export GREP_COLOR='1;37' # 白
+# rvm config
+alias ru='rvm use'
 
+# grep config
+export GREP_COLOR='1;37' # 白
 export GREP_OPTIONS='--color=auto'
 # パイプでも表示するが Git表示でおかしくなる
 # export GREP_OPTIONS='--color=always'
@@ -225,6 +250,7 @@ colors
 # white
 # black
 
+# PROMPT, SPROMPT
 case ${UID} in
 0) #root
   PROMPT="[%{${fg[red]}%}%n@%m%{${reset_color}%}] %{${fg[blue]}%}#%{${reset_color}%} "
@@ -232,7 +258,7 @@ case ${UID} in
   SPROMPT="%B%{${fg[blue]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   ;;
 *)
-  PROMPT="%{${fg[green]}%}%#%{${reset_color}%} "
+  
   # PROMPT="[%n@%m] %{${fg[blue]}%}#%{${reset_color}%} "
   PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
@@ -241,22 +267,14 @@ case ${UID} in
 esac
 
 
-############
-###  Git
-#
+# RPROMPT
+
 # Gitのブランチ名をRPROMPTに表示する
-#
 # TODO: (あとで) vcs_infoで書き換える
 
 _set_current_branch() {
   GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
 }
-
-# _set_ruby_ver() {
-#   # RUBY_VER=$( ruby -e 'puts `ruby -v`.split(" ")[1]' )
-# 	# RUBY_VER=$( ruby -e 'puts RUBY_VERSION' )
-# 	RUBY_VER=$( ruby -v | awk '{print $2};' )
-# }
 
 # ブランチの表示色の変更
 _check_status() {
@@ -273,27 +291,29 @@ _check_status() {
 
 _update_rprompt () {
   if [ "`git ls-files 2>/dev/null`" ]; then
-			# Rubyバージョン表記
-			# RPROMPT="%{${fg[white]}%}[$RUBY_VER:%~:%{${fg[$BRANCH_CLOR]}%}$GIT_CURRENT_BRANCH%{${fg[white]}%}]%{${reset_color}%}"
+			PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
 			RPROMPT="%{${fg[white]}%}[%~:%{${fg[$BRANCH_CLOR]}%}$GIT_CURRENT_BRANCH%{${fg[white]}%}]%{${reset_color}%}"
+			# Rubyバージョン表記版
+			# RPROMPT="%{${fg[white]}%}[%~:%{${fg[$BRANCH_CLOR]}%}$GIT_CURRENT_BRANCH%{${fg[white]}%}]%{${reset_color}%}"
   else
+			PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
       RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
   fi
 }
 
-precmd()
-{
+
+
+# 遷移による実行関数
+precmd() {
+	RUBY_VER=$(~/.rvm/bin/rvm-prompt)
   _set_current_branch
 	_check_status
-	# _set_ruby_ver
   _update_rprompt
 }
-
-chpwd()
-{
+chpwd() {
+	RUBY_VER=$(~/.rvm/bin/rvm-prompt)
   _set_current_branch
 	_check_status
-	# _set_ruby_ver
   _update_rprompt
 }
 
