@@ -5,6 +5,9 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # export PATH=/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 
+# rvm (Ruby Version Manager)
+if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rvm ; fi
+
 export EDITOR=vim
 
 # Short Cuts
