@@ -269,11 +269,17 @@ esac
 
 # RPROMPT
 
-# Gitのブランチ名をRPROMPTに表示する
-# TODO: (あとで) vcs_infoで書き換える
+# Gitのブランチ名をRPROMPTに表示する (vcs_info) : zshの関数
 
-_set_current_branch() {
-  GIT_CURRENT_BRANCH=$( git branch &> /dev/null | grep '^\*' | cut -b 3- )
+autoload -Uz vcs_info
+# zstyle ':vcs_info:*' formats '%S:%r-%b'
+zstyle ':vcs_info:*' formats "%b"
+zstyle ':vcs_info:*' actionformats '%b|%a'
+
+_git_info(){
+		psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
 # ブランチの表示色の変更
@@ -286,19 +292,17 @@ _check_status() {
 			BRANCH_CLOR="yellow";;
 		*) # 変更あり
 			BRANCH_CLOR="red";;
-  esac
+   esac
 }
 
 _update_rprompt () {
-  if [ "`git ls-files 2>/dev/null`" ]; then
+		if [ ${vcs_info_msg_0_} ]; then
 			PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
-			RPROMPT="%{${fg[white]}%}[%~:%{${fg[$BRANCH_CLOR]}%}$GIT_CURRENT_BRANCH%{${fg[white]}%}]%{${reset_color}%}"
-			# Rubyバージョン表記版
-			# RPROMPT="%{${fg[white]}%}[%~:%{${fg[$BRANCH_CLOR]}%}$GIT_CURRENT_BRANCH%{${fg[white]}%}]%{${reset_color}%}"
-  else
+			RPROMPT="%{${fg[white]}%}[%~:%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+		else
 			PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
       RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
-  fi
+		fi
 }
 
 
@@ -306,15 +310,16 @@ _update_rprompt () {
 # 遷移による実行関数
 precmd() {
 	RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-  _set_current_branch
 	_check_status
+	_git_info
   _update_rprompt
+	
 }
 chpwd() {
 	RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-  _set_current_branch
 	_check_status
-  _update_rprompt
+	_git_info
+	_update_rprompt
 }
 
 
