@@ -283,43 +283,44 @@ _git_info(){
 }
 
 # ブランチの表示色の変更
-_check_status() {
-	 GIT_STATUS=$( git status &> /dev/null | wc -l | cut -c 7-)
-   case $GIT_STATUS in
-		" 2") # ワーキングディレクトリがcleanな状態
-			BRANCH_CLOR="green";;
-		" 4") # cleanだが、pushしてないコミットあり
-			BRANCH_CLOR="yellow";;
-		*) # 変更あり
-			BRANCH_CLOR="red";;
-   esac
+_check_git_status() {
+		GIT_STATUS=$( git status &> /dev/null | wc -l | cut -c 7-)
+		case $GIT_STATUS in
+				" 2") # ワーキングディレクトリがcleanな状態
+						BRANCH_CLOR="green";;
+				" 4") # cleanだが、pushしてないコミットあり
+						BRANCH_CLOR="yellow";;
+				*) # 変更あり
+						BRANCH_CLOR="red";;
+		esac
+}
+
+_current_ruby_ver() {
+		RUBY_VER=$(~/.rvm/bin/rvm-prompt)
 }
 
 _update_rprompt () {
+		# 左プロンプトにRubyバージョン表記
+		PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
 		if [ ${vcs_info_msg_0_} ]; then
-			PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
-			RPROMPT="%{${fg[white]}%}[%~:%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+				RPROMPT="%{${fg[white]}%}[%~:%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
 		else
-			PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
-      RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
+				RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
 		fi
 }
 
-
-
-# 遷移による実行関数
 precmd() {
-	RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-	_check_status
-	_git_info
-  _update_rprompt
-	
+		_current_ruby_ver
+		_check_git_status
+		_git_info
+		_update_rprompt
 }
+
 chpwd() {
-	RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-	_check_status
-	_git_info
-	_update_rprompt
+		_current_ruby_ver
+		_check_git_status
+		_git_info
+		_update_rprompt
 }
 
 
@@ -359,27 +360,25 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
-
-
-function google() {
-  local str opt
-  if [ $# != 0 ]; then
-    for i in $*; do
-      str="$str+$i"
-    done
-    str=`echo $str | sed 's/^¥+//'`
-    opt='search?num=50&hl=ja&lr=lang_ja'
-    opt="${opt}&q=${str}"
-  fi
-  open http://www.google.com/$opt
+# Google による検索
+function ggl() {
+		local str opt
+		if [ $# != 0 ]; then
+						for i in $*; do
+								str="$str+$i"
+						done
+						str=`echo $str | sed 's/^¥+//'`
+						opt='search?num=50&hl=ja&lr=lang_ja'
+						opt="${opt}&q=${str}"
+		fi
+		open http://www.google.com/$opt
 }
 
+# "Control-^" で parent directory へ移動
 function cdup() {
 		echo
 		cd ..
 		zle reset-prompt
 }
 zle -N cdup
-bindkey '¥^' cdup
-
-
+bindkey '^\^' cdup
