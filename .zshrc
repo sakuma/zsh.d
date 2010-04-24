@@ -46,14 +46,20 @@ alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -A'
 # same -> % gemdir system 
-# alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
-alias cdg=cd_gem_dir
+alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
+# alias cdg=cd_gem_dir
 # alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems; pwd'
 alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
 alias emal='emacsclient'
 alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
 alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
 alias taif='tail -f'
+
+alias -g M="| $PAGER"
+alias -g G='| grep'
+alias -g W='| wc'
+alias -g H='| head'
+alias -g T='| tail'
 
 # rvm config
 alias ru='rvm use'
