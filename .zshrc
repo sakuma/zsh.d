@@ -5,6 +5,15 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # export PATH=/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 
+# java
+# export JAVA_HOME=/usr
+
+# jruby
+# export PATH=/Users/nao/workspace/ruby/jruby/jruby-source/bin:$PATH
+# export JRUBY_HOME=/Users/nao/workspace/ruby/jruby/jruby-source
+
+# export GEM_PATH=/opt/local/lib/ruby/gems/1.8/gems
+
 # rvm (Ruby Version Manager)
 if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rvm ; fi
 
