@@ -8,6 +8,12 @@ export MANPATH=/opt/local/share/man:$MANPATH
 # java
 # export JAVA_HOME=/usr
 
+### clojure
+
+export CLOJURE_EXT=~/.clojure
+PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
+alias clj=clj-env-dir
+
 # jruby
 # export PATH=/Users/nao/workspace/ruby/jruby/jruby-source/bin:$PATH
 # export JRUBY_HOME=/Users/nao/workspace/ruby/jruby/jruby-source
