@@ -1,5 +1,5 @@
 
-source ~/.zsh.d/.zshrc
+source ~/.zsh.d/zshrc
 
 # if [ -f ~/.zshrc ] ; then
 #     source ~/.zshrc

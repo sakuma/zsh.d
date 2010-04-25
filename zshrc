@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 ### PATH
 export PATH=/usr/local/bin:$PATH
 # Ports用
@@ -290,12 +292,17 @@ esac
 
 # RPROMPT
 
-# Gitのブランチ名をRPROMPTに表示する (vcs_info) : zshの関数
+# Gitのブランチ名をRPROMPTに表示する --- vcs_info(zshの組み込み関数)を使う
 
+# vcs_infoを読み込む
 autoload -Uz vcs_info
-# zstyle ':vcs_info:*' formats '%S:%r-%b'
-zstyle ':vcs_info:*' formats "%b"
-zstyle ':vcs_info:*' actionformats '%b|%a'
+
+## zstyle ':vcs_info:*' formats '%S:%r-%b'
+zstyle ':vcs_info:*' formats "/%S:%b"
+zstyle ':vcs_info:*' actionformats '/%S:%b|%a'
+# zstyle ':vcs_info:*' enable git cvs svn
+# zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+# zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 
 _git_info(){
 		psvar=()
@@ -305,41 +312,48 @@ _git_info(){
 
 # ブランチの表示色の変更
 _check_git_status() {
-		GIT_STATUS=$( git status &> /dev/null | wc -l | cut -c 7-)
-		case $GIT_STATUS in
-				" 2") # ワーキングディレクトリがcleanな状態
-						BRANCH_CLOR="green";;
-				" 4") # cleanだが、pushしてないコミットあり
-						BRANCH_CLOR="yellow";;
-				*) # 変更あり
-						BRANCH_CLOR="red";;
-		esac
+		GIT_STATUS=$( git status )
+		if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
+				GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
+				if [[ $GIT_LINE == "2" ]]; then
+						 # ワーキングディレクトリがcleanな状態
+						BRANCH_CLOR=green
+				else
+						 # cleanだが、pushしてない or remoteとの差分コミットあり
+						BRANCH_CLOR=yellow
+				fi
+		else
+				BRANCH_CLOR=red
+		fi 
 }
 
 _current_ruby_ver() {
 		RUBY_VER=$(~/.rvm/bin/rvm-prompt)
 }
 
+_org_pwd() {
+		GIT_DIR=$(pwd | xargs dirname)
+}
+
 _update_rprompt () {
 		# 左プロンプトにRubyバージョン表記
 		PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
 		if [ ${vcs_info_msg_0_} ]; then
-				RPROMPT="%{${fg[white]}%}[%~:%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+				_check_git_status
+				RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
 		else
-				RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
+				RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
 		fi
 }
 
 precmd() {
 		_current_ruby_ver
-		_check_git_status
 		_git_info
 		_update_rprompt
 }
 
 chpwd() {
 		_current_ruby_ver
-		_check_git_status
 		_git_info
 		_update_rprompt
 }
