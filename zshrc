@@ -297,12 +297,26 @@ esac
 # vcs_infoを読み込む
 autoload -Uz vcs_info
 
-## zstyle ':vcs_info:*' formats '%S:%r-%b'
+# ## zstyle ':vcs_info:*' formats '%S:%r-%b'
 zstyle ':vcs_info:*' formats "/%S:%b"
 zstyle ':vcs_info:*' actionformats '/%S:%b|%a'
 # zstyle ':vcs_info:*' enable git cvs svn
 # zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
 # zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+
+# zstyle ':vcs_info:*:prompt:*' formats "/%S:%b:%u:%c"
+# zstyle ':vcs_info:*:prompt:*' actionformats '/%S:%b:%u:%c|%a'
+# # zstyle ':vcs_info:*' enable git cvs svn
+# # zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+# # zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+# zstyle ':vcs_info:*:prompt:*' check-for-changes true
+# zstyle ':vcs_info:*:prompt:*' unstagedstr 'u' #'¹'  # display ¹ if there are unstaged changes
+# zstyle ':vcs_info:*:prompt:*' stagedstr  'c'#'²'    # display ² if there are staged changes
+# # zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}//" "${FMT_PATH}"
+# # zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}//"              "${FMT_PATH}"
+# zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~" 
+
+
 
 _git_info(){
 		psvar=()
@@ -314,6 +328,8 @@ _git_info(){
 _check_git_status() {
 		GIT_STATUS=$( git status )
 		if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
+				# on "zsh 4.3.10"
+				# GIT_LINE=$( echo $GIT_STATUS | wc -l)
 				GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
 				if [[ $GIT_LINE == "2" ]]; then
 						 # ワーキングディレクトリがcleanな状態
@@ -346,13 +362,19 @@ _update_rprompt () {
 		fi
 }
 
+# プロンプトを再評価
+# setopt prompt_subst
+
+
 precmd() {
+		vcs_info 'prompt'
 		_current_ruby_ver
 		_git_info
 		_update_rprompt
 }
 
 chpwd() {
+		vcs_info 'prompt'
 		_current_ruby_ver
 		_git_info
 		_update_rprompt
