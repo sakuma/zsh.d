@@ -1,3 +1,4 @@
+# -*- mode:shell-script -*-
 
 source ~/.zsh.d/zshrc
 

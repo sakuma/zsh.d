@@ -1,4 +1,4 @@
-# -*- mode: shell-script -*-
+# -*- mode:shell-script -*-
 
 ### PATH
 export PATH=/usr/local/bin:$PATH
@@ -109,7 +109,7 @@ export GREP_OPTIONS='--color=auto'
 
 # git
 alias gis='git status'
-
+alias gil='git log'
 # rails
 alias ss='./script/server'
 alias ssu='./script/server -u'
