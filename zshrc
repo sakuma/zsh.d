@@ -326,21 +326,21 @@ _git_info(){
 
 # ブランチの表示色の変更
 _check_git_status() {
-		GIT_STATUS=$( git status )
-		if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
-				# on "zsh 4.3.10"
-				# GIT_LINE=$( echo $GIT_STATUS | wc -l)
-				GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
-				if [[ $GIT_LINE == "2" ]]; then
-						 # ワーキングディレクトリがcleanな状態
-						BRANCH_CLOR=green
-				else
-						 # cleanだが、pushしてない or remoteとの差分コミットあり
-						BRANCH_CLOR=yellow
-				fi
-		else
-				BRANCH_CLOR=red
-		fi 
+    GIT_STATUS=$( git status 2>/dev/null )
+    if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
+        # on "zsh 4.3.10"
+        # GIT_LINE=$( echo $GIT_STATUS | wc -l)
+        GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
+        if [[ $GIT_LINE == "2" ]]; then
+             # ワーキングディレクトリがcleanな状態
+            BRANCH_CLOR=green
+        else
+             # cleanだが、pushしてない or remoteとの差分コミットあり
+            BRANCH_CLOR=yellow
+        fi
+    else
+        BRANCH_CLOR=red
+    fi
 }
 
 _current_ruby_ver() {
@@ -352,14 +352,16 @@ _org_pwd() {
 }
 
 _update_rprompt () {
-		# 左プロンプトにRubyバージョン表記
-		PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
-		if [ ${vcs_info_msg_0_} ]; then
-				_check_git_status
-				RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
-		else
-				RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
-		fi
+    # 左プロンプトにRubyバージョン表記
+    PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
+    if [ ${vcs_info_msg_0_} ]; then
+        if [[ -z $( git status 2>/dev/null | grep "fatal" ) ]]; then
+            _check_git_status
+        fi
+        RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+    else
+        RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+    fi
 }
 
 # プロンプトを再評価
