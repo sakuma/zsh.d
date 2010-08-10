@@ -27,8 +27,8 @@ if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rv
 
 # function gemdir {
 #   if [[ -z "$1" ]] ; then
-# 		echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
-# 	else
+#     echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
+#   else
 #     rvm "$1"
 #     cd $(rvm gemdir)
 #     pwd
@@ -37,22 +37,22 @@ if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rv
 
 function cd_gem_dir {
   if [[ -z "$1" ]] ; then
-		echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
-	else
-		cd $(rvm gemdir $1)
+    echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
+  else
+    cd $(rvm gemdir $1)
     pwd
   fi
 }
 
 # function rvm_use {
-# 		if [ -z "$1" ]; then
-# 				echo "Ruby interpreter expects a parameter, which should be a valid RVM Ruby selector"
-# 				echo "ex) % ru jruby"
-# 		elif rvm use $1 ;then
-# 				RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-# 		else
-# 				echo "or 'rvm list' "
-# 		fi
+#     if [ -z "$1" ]; then
+#         echo "Ruby interpreter expects a parameter, which should be a valid RVM Ruby selector"
+#         echo "ex) % ru jruby"
+#     elif rvm use $1 ;then
+#         RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+#     else
+#         echo "or 'rvm list' "
+#     fi
 # }
 
 
@@ -62,7 +62,7 @@ export EDITOR=vim
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -A'
-# same -> % gemdir system 
+# same -> % gemdir system
 alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
 # alias cdg=cd_gem_dir
 # alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems; pwd'
@@ -206,7 +206,7 @@ export LANG=ja_JP.UTF-8
 ## auto change directory
 setopt auto_cd
 
-## cd -[tab] で過去の移動したディレクトリを番号付きで表示する 
+## cd -[tab] で過去の移動したディレクトリを番号付きで表示する
 setopt auto_pushd
 
 ## auto_pushdで重複するディレクトリは記録しないようにする
@@ -281,7 +281,7 @@ case ${UID} in
   SPROMPT="%B%{${fg[blue]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   ;;
 *)
-  
+
   # PROMPT="[%n@%m] %{${fg[blue]}%}#%{${reset_color}%} "
   PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
@@ -314,12 +314,12 @@ zstyle ':vcs_info:*' actionformats '/%S:%b|%a'
 # zstyle ':vcs_info:*:prompt:*' stagedstr  'c'#'²'    # display ² if there are staged changes
 # # zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}//" "${FMT_PATH}"
 # # zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}//"              "${FMT_PATH}"
-# zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~" 
+# zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~"
 
 
 
 _git_info(){
-		psvar=()
+    psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
@@ -344,11 +344,11 @@ _check_git_status() {
 }
 
 _current_ruby_ver() {
-		RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+    RUBY_VER=$(~/.rvm/bin/rvm-prompt)
 }
 
 _org_pwd() {
-		GIT_DIR=$(pwd | xargs dirname)
+    GIT_DIR=$(pwd | xargs dirname)
 }
 
 _update_rprompt () {
@@ -369,17 +369,17 @@ _update_rprompt () {
 
 
 precmd() {
-		vcs_info 'prompt'
-		_current_ruby_ver
-		_git_info
-		_update_rprompt
+    vcs_info 'prompt'
+    _current_ruby_ver
+    _git_info
+    _update_rprompt
 }
 
 chpwd() {
-		vcs_info 'prompt'
-		_current_ruby_ver
-		_git_info
-		_update_rprompt
+    vcs_info 'prompt'
+    _current_ruby_ver
+    _git_info
+    _update_rprompt
 }
 
 
@@ -421,23 +421,23 @@ bindkey "^N" history-beginning-search-forward-end
 
 # Google による検索
 function ggl() {
-		local str opt
-		if [ $# != 0 ]; then
-						for i in $*; do
-								str="$str+$i"
-						done
-						str=`echo $str | sed 's/^¥+//'`
-						opt='search?num=50&hl=ja&lr=lang_ja'
-						opt="${opt}&q=${str}"
-		fi
-		open http://www.google.com/$opt
+    local str opt
+    if [ $# != 0 ]; then
+            for i in $*; do
+                str="$str+$i"
+            done
+            str=`echo $str | sed 's/^¥+//'`
+            opt='search?num=50&hl=ja&lr=lang_ja'
+            opt="${opt}&q=${str}"
+    fi
+    open http://www.google.com/$opt
 }
 
 # "Control-^" で parent directory へ移動
 function cdup() {
-		echo
-		cd ..
-		zle reset-prompt
+    echo
+    cd ..
+    zle reset-prompt
 }
 zle -N cdup
 bindkey '^\^' cdup
