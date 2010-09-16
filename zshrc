@@ -23,7 +23,7 @@ alias clj=clj-env-dir
 # export GEM_PATH=/opt/local/lib/ruby/gems/1.8/gems
 
 # rvm (Ruby Version Manager)
-if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rvm ; fi
+if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
 # function gemdir {
 #   if [[ -z "$1" ]] ; then
