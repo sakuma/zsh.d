@@ -371,7 +371,7 @@ _org_pwd() {
 
 _update_rprompt () {
     # 左プロンプトにRubyバージョン表記
-    PROMPT="%{${fg[green]}%}$RUBY_VER:%#%{${reset_color}%} "
+    PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} %{${reset_color}%}%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     if [ ${vcs_info_msg_0_} ]; then
         if [[ -z $( git status 2>/dev/null | grep "fatal" ) ]]; then
             _check_git_status
