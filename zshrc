@@ -1,37 +1,36 @@
 # -*- mode:shell-script -*-
 
 ### PATH
-export PATH=/usr/local/bin:$PATH
-# Ports用
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# export PATH=/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
+## basic
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
 
-# java
-# export JAVA_HOME=/usr
+## MacPorts
+# bin
+PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
+for path in ${PortsBinPaths[*]}; do
+  if [[ -d $( echo ${path} ) ]]; then
+    export PATH=${path}:$PATH
+  fi
+done
+# man
+if [[ -d /opt/local/share/man ]]; then
+    export MANPATH=/opt/local/share/man:$MANPATH
+fi
 
-### clojure
+## clojure
+# export CLOJURE_EXT=~/.clojure
+# PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
 
-export CLOJURE_EXT=~/.clojure
-PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
-alias clj=clj-env-dir
-
-# jruby
-# export PATH=/Users/nao/workspace/ruby/jruby/jruby-source/bin:$PATH
-# export JRUBY_HOME=/Users/nao/workspace/ruby/jruby/jruby-source
-
-
-############################
-##
 ##  rvm (Ruby Version Manager)
-
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
+RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
+for RVM_PATH in ${RVM_PATHS[*]}; do
+    if [[ -d $RVM_PATH ]]; then
+        export PATH=$RVM_PATH:$PATH
+    fi
+done
 
-# PATH (rvm でインストールしたpackageのPATH設定)
-if [[ -d $HOME/.rvm/usr/bin ]]; then
-    export PATH=$HOME/.rvm/usr/bin:$PATH
-fi
 
 # function gemdir {
 #   if [[ -z "$1" ]] ; then
@@ -65,7 +64,7 @@ function cd_gem_dir {
 
 
 # EDITOR
-if [ -s $( which vim ) ];then
+if [[ -x $( which vim ) ]]; then
     export EDITOR=vim
 else
     export EDITOR=vi
