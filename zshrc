@@ -56,7 +56,13 @@ function cd_gem_dir {
 # }
 
 
-export EDITOR=vim
+# EDITOR
+if [ -s $( which vim ) ];then
+    export EDITOR=vim
+else
+    export EDITOR=vi
+fi
+
 
 # Short Cuts
 alias ls='ls -GF'
