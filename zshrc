@@ -20,10 +20,18 @@ alias clj=clj-env-dir
 # export PATH=/Users/nao/workspace/ruby/jruby/jruby-source/bin:$PATH
 # export JRUBY_HOME=/Users/nao/workspace/ruby/jruby/jruby-source
 
-# export GEM_PATH=/opt/local/lib/ruby/gems/1.8/gems
 
-# rvm (Ruby Version Manager)
+############################
+##
+##  rvm (Ruby Version Manager)
+
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
+
+
+# PATH (rvm でインストールしたpackageのPATH設定)
+if [[ -d $HOME/.rvm/usr/bin ]]; then
+    export PATH=$HOME/.rvm/usr/bin:$PATH
+fi
 
 # function gemdir {
 #   if [[ -z "$1" ]] ; then
