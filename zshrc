@@ -429,6 +429,8 @@ bindkey -e
 # bindkey -v
 
 
+compinit -d $HOME/.zsh.d/.zcompdump
+
 ## historical backward/forward search with linehead string binded to ^P/^N
 #
 autoload history-search-end
