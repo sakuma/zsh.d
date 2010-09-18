@@ -7,9 +7,9 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
 ## MacPorts
 # bin
 PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
-for path in ${PortsBinPaths[*]}; do
-  if [[ -d $( echo ${path} ) ]]; then
-    export PATH=${path}:$PATH
+for port_path in ${PortsBinPaths[*]}; do
+  if [[ -d $( echo ${port_path} ) ]]; then
+    export PATH=${port_path}:$PATH
   fi
 done
 # man
@@ -428,6 +428,8 @@ bindkey -e
 #
 # bindkey -v
 
+
+compinit -d $HOME/.zsh.d/.zcompdump
 
 ## historical backward/forward search with linehead string binded to ^P/^N
 #
