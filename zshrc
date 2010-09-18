@@ -362,7 +362,11 @@ _check_git_status() {
 }
 
 _current_ruby_ver() {
-    RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+    if [[ -s $HOME/.rvm/scripts/rvm ]]; then
+        RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+    else
+        RUBY_VER=""
+    fi
 }
 
 _org_pwd() {
