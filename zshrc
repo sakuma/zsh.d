@@ -58,18 +58,23 @@ function cd_gem_dir {
 
 export EDITOR=vim
 
-# Short Cuts
+
+###
+# Alias
+
 alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -A'
-# same -> % gemdir system
-alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
-# alias cdg=cd_gem_dir
-# alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems; pwd'
-alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
+
+# Macでの設定
+
+if [[ `uname` == "Darwin" ]]; then
+    alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
+    alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
+    alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
+fi
+
 alias emal='emacsclient'
-alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
-alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
 alias taif='tail -f'
 
 alias -g M="| $PAGER"
@@ -80,6 +85,15 @@ alias -g T='| tail'
 
 # rvm config
 alias ru='rvm use'
+
+# git
+alias gis='git status'
+alias gil='git log'
+# rails
+alias ss='./script/server'
+alias ssu='./script/server -u'
+alias sc='./script/console'
+
 
 # grep config
 export GREP_COLOR='1;37' # 白
@@ -105,16 +119,6 @@ export GREP_OPTIONS='--color=auto'
 # 3xの代わりに4xと指定すると反転表示の指示です。たとえば
 #   set GREP_COLOR=1;41;37
 # のようにすると、マッチした部分を赤い背景に白い文字で表示します。
-
-
-# git
-alias gis='git status'
-alias gil='git log'
-# rails
-alias ss='./script/server'
-alias ssu='./script/server -u'
-alias sc='./script/console'
-
 
 
 
