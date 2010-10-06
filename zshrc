@@ -1,29 +1,36 @@
 # -*- mode:shell-script -*-
 
 ### PATH
-export PATH=/usr/local/bin:$PATH
-# Ports用
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# export PATH=/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin:$PATH
-export MANPATH=/opt/local/share/man:$MANPATH
+## basic
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
 
-# java
-# export JAVA_HOME=/usr
+## MacPorts
+# bin
+PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
+for port_path in ${PortsBinPaths[*]}; do
+  if [[ -d $( echo ${port_path} ) ]]; then
+    export PATH=${port_path}:$PATH
+  fi
+done
+# man
+if [[ -d /opt/local/share/man ]]; then
+    export MANPATH=/opt/local/share/man:$MANPATH
+fi
 
-### clojure
+## clojure
+# export CLOJURE_EXT=~/.clojure
+# PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
 
-export CLOJURE_EXT=~/.clojure
-PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
-alias clj=clj-env-dir
+##  rvm (Ruby Version Manager)
+if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
-# jruby
-# export PATH=/Users/nao/workspace/ruby/jruby/jruby-source/bin:$PATH
-# export JRUBY_HOME=/Users/nao/workspace/ruby/jruby/jruby-source
+RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
+for RVM_PATH in ${RVM_PATHS[*]}; do
+    if [[ -d $RVM_PATH ]]; then
+        export PATH=$RVM_PATH:$PATH
+    fi
+done
 
-# export GEM_PATH=/opt/local/lib/ruby/gems/1.8/gems
-
-# rvm (Ruby Version Manager)
-if [[ -s /Users/nao/.rvm/scripts/rvm ]] ; then source /Users/nao/.rvm/scripts/rvm ; fi
 
 # function gemdir {
 #   if [[ -z "$1" ]] ; then
@@ -56,7 +63,13 @@ function cd_gem_dir {
 # }
 
 
-export EDITOR=vim
+# EDITOR
+if [[ -x $( which vim ) ]]; then
+    export EDITOR=vim
+else
+    export EDITOR=vi
+fi
+
 
 
 ###
@@ -334,7 +347,12 @@ _check_git_status() {
     if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
         # on "zsh 4.3.10"
         # GIT_LINE=$( echo $GIT_STATUS | wc -l)
-        GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
+        if [[ -n $( uname -a | grep -i "linux" ) ]] ;then
+            GIT_LINE=$( echo $GIT_STATUS | wc -l )
+        else
+            GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
+        fi
+
         if [[ $GIT_LINE == "2" ]]; then
              # ワーキングディレクトリがcleanな状態
             BRANCH_CLOR=green
@@ -348,7 +366,11 @@ _check_git_status() {
 }
 
 _current_ruby_ver() {
-    RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+    if [[ -s $HOME/.rvm/scripts/rvm ]]; then
+        RUBY_VER=$(~/.rvm/bin/rvm-prompt)
+    else
+        RUBY_VER=""
+    fi
 }
 
 _org_pwd() {
@@ -414,6 +436,8 @@ bindkey -e
 #
 # bindkey -v
 
+
+compinit -d $HOME/.zsh.d/.zcompdump
 
 ## historical backward/forward search with linehead string binded to ^P/^N
 #
