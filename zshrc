@@ -2,15 +2,19 @@
 
 ### PATH
 ## basic
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
+if [ -x /usr/libexec/path_helper ]; then
+    eval `/usr/libexec/path_helper -s`
+else
+    export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
+fi
 
 ## MacPorts
 # bin
 PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
 for port_path in ${PortsBinPaths[*]}; do
-  if [[ -d $( echo ${port_path} ) ]]; then
-    export PATH=${port_path}:$PATH
-  fi
+    if [[ -d $( echo ${port_path} ) ]]; then
+        export PATH=${port_path}:$PATH
+    fi
 done
 # man
 if [[ -d /opt/local/share/man ]]; then
@@ -24,12 +28,12 @@ fi
 ##  rvm (Ruby Version Manager)
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
-RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
-for RVM_PATH in ${RVM_PATHS[*]}; do
-    if [[ -d $RVM_PATH ]]; then
-        export PATH=$RVM_PATH:$PATH
-    fi
-done
+# RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
+# for RVM_PATH in ${RVM_PATHS[*]}; do
+#     if [[ -d $RVM_PATH ]]; then
+#         export PATH=$RVM_PATH:$PATH
+#     fi
+# done
 
 
 # function gemdir {
@@ -396,7 +400,7 @@ _update_rprompt () {
 
 precmd() {
     vcs_info 'prompt'
-    _current_ruby_ver
+    # _current_ruby_ver
     _git_info
     _update_rprompt
 }
