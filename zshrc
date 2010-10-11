@@ -75,42 +75,9 @@ else
 fi
 
 
-
 ###
 # Alias
-
-alias ls='ls -GF'
-alias ll='ls -l'
-alias la='ls -A'
-
-# Macでの設定
-
-if [[ `uname` == "Darwin" ]]; then
-    alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
-    alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
-    alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
-fi
-
-alias emal='emacsclient'
-alias taif='tail -f'
-
-alias -g M="| $PAGER"
-alias -g G='| grep'
-alias -g W='| wc'
-alias -g H='| head'
-alias -g T='| tail'
-
-# rvm config
-alias ru='rvm use'
-
-# git
-alias gis='git status'
-alias gil='git log'
-# rails
-alias ss='./script/server'
-alias ssu='./script/server -u'
-alias sc='./script/console'
-
+source $HOME/.zsh.d/aliases
 
 # grep config
 export GREP_COLOR='1;37' # 白
