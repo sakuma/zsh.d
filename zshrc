@@ -226,6 +226,8 @@ setopt list_types
 # 補完候補リストの日本語を正しく表示
 setopt print_eight_bit
 
+# シングルクォート内にシングルクォートを使えるようにする
+setopt rc_quotes
 
 # lsコマンドの補完候補にも色付き表示
 # eval `dircolors`
