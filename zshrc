@@ -23,6 +23,7 @@ fi
 
 ## clojure
 # export CLOJURE_EXT=~/.clojure
+# export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0/clojure-contrib.jar
 # PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
 
 ##  rvm (Ruby Version Manager)
@@ -346,7 +347,7 @@ _org_pwd() {
     GIT_DIR=$(pwd | xargs dirname)
 }
 
-_update_rprompt () {
+_update_prompt () {
     # server用
     # PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} %{${reset_color}%}%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     # client用
@@ -372,14 +373,14 @@ precmd() {
     vcs_info 'prompt'
     _current_ruby_ver
     _git_info
-    _update_rprompt
+    _update_prompt
 }
-
+{
 chpwd() {
     vcs_info 'prompt'
     _current_ruby_ver
     _git_info
-    _update_rprompt
+    _update_prompt
 }
 
 
