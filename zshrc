@@ -322,7 +322,7 @@ precmd() {
     _git_info
     _update_prompt
 }
-
+{
 chpwd() {
     vcs_info 'prompt'
     _current_ruby_ver
