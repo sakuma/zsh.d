@@ -229,6 +229,9 @@ setopt print_eight_bit
 # シングルクォート内にシングルクォートを使えるようにする
 setopt rc_quotes
 
+# 補完で末尾に補われた / が自動的に 削除される
+setopt auto_remove_slash
+
 # lsコマンドの補完候補にも色付き表示
 # eval `dircolors`
 # zstyle ':completion:*:default' list-colors ${LS_COLORS}
@@ -360,6 +363,9 @@ _update_rprompt () {
 
 # プロンプトを再評価
 # setopt prompt_subst
+
+# カーソル位置は保持したままファ イル名一覧を順次その場で表示
+# setopt always_last_prompt
 
 
 precmd() {
