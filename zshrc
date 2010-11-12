@@ -349,7 +349,7 @@ _org_pwd() {
 
 _update_prompt () {
     # server用
-    PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} "
+    PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     # client用
     # PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     if [ ${vcs_info_msg_0_} ]; then
