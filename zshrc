@@ -443,3 +443,5 @@ function cdup() {
 }
 zle -N cdup
 bindkey '^\^' cdup
+
+unsetopt extended_glob
