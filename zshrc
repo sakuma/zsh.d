@@ -135,13 +135,19 @@ export CLASSPATH=/opt/local/share/java/clojure/lib/clojure.jar:/opt/local/share/
 
 
 
-
+##
 # コード補完
+
+# 拡張用の補完パス
+fpath=($HOME/.zsh.d/completions $fpath)
+
 autoload -U compinit
 compinit -u
 
+# フォーマット
 zstyle ':completion:*' list-colors 'di=36' 'ln=35'
 zstyle ':completion:*:default' menu select=1
+
 export LSCOLORS=gxfxcbdxbxegedabagacad
     # position: 1   5    0    5    0
 
