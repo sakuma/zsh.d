@@ -2,15 +2,19 @@
 
 ### PATH
 ## basic
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
+if [ -x /usr/libexec/path_helper ]; then
+    eval `/usr/libexec/path_helper -s`
+else
+    export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
+fi
 
 ## MacPorts
 # bin
 PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
 for port_path in ${PortsBinPaths[*]}; do
-  if [[ -d $( echo ${port_path} ) ]]; then
-    export PATH=${port_path}:$PATH
-  fi
+    if [[ -d $( echo ${port_path} ) ]]; then
+        export PATH=${port_path}:$PATH
+    fi
 done
 # man
 if [[ -d /opt/local/share/man ]]; then
@@ -19,17 +23,18 @@ fi
 
 ## clojure
 # export CLOJURE_EXT=~/.clojure
+# export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0/clojure-contrib.jar
 # PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
 
 ##  rvm (Ruby Version Manager)
 if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
-RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
-for RVM_PATH in ${RVM_PATHS[*]}; do
-    if [[ -d $RVM_PATH ]]; then
-        export PATH=$RVM_PATH:$PATH
-    fi
-done
+# RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
+# for RVM_PATH in ${RVM_PATHS[*]}; do
+#     if [[ -d $RVM_PATH ]]; then
+#         export PATH=$RVM_PATH:$PATH
+#     fi
+# done
 
 
 # function gemdir {
@@ -71,28 +76,9 @@ else
 fi
 
 
-# Short Cuts
-alias ls='ls -GF'
-alias ll='ls -l'
-alias la='ls -A'
-# same -> % gemdir system
-alias cdg='cd /opt/local/lib/ruby/gems/1.8/gems; pwd'
-# alias cdg=cd_gem_dir
-# alias cdg19='cd /opt/local/lib/ruby1.9/gems/1.9.1/gems; pwd'
-alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
-alias emal='emacsclient'
-alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
-alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
-alias taif='tail -f'
-
-alias -g M="| $PAGER"
-alias -g G='| grep'
-alias -g W='| wc'
-alias -g H='| head'
-alias -g T='| tail'
-
-# rvm config
-alias ru='rvm use'
+###
+# Alias
+source $HOME/.zsh.d/aliases
 
 # grep config
 export GREP_COLOR='1;37' # 白
@@ -118,16 +104,6 @@ export GREP_OPTIONS='--color=auto'
 # 3xの代わりに4xと指定すると反転表示の指示です。たとえば
 #   set GREP_COLOR=1;41;37
 # のようにすると、マッチした部分を赤い背景に白い文字で表示します。
-
-
-# git
-alias gis='git status'
-alias gil='git log'
-# rails
-alias ss='./script/server'
-alias ssu='./script/server -u'
-alias sc='./script/console'
-
 
 
 
@@ -251,6 +227,11 @@ setopt list_types
 # 補完候補リストの日本語を正しく表示
 setopt print_eight_bit
 
+# シングルクォート内にシングルクォートを使えるようにする
+setopt rc_quotes
+
+# 補完で末尾に補われた / が自動的に 削除される
+setopt auto_remove_slash
 
 # lsコマンドの補完候補にも色付き表示
 # eval `dircolors`
@@ -310,23 +291,16 @@ esac
 # vcs_infoを読み込む
 autoload -Uz vcs_info
 
-# ## zstyle ':vcs_info:*' formats '%S:%r-%b'
-zstyle ':vcs_info:*' formats "/%S:%b"
+zstyle ':vcs_info:*' enable git cvs svn
+zstyle ':vcs_info:*:prompt:*' formats "/%S:%b:%u:%c"
 zstyle ':vcs_info:*' actionformats '/%S:%b|%a'
-# zstyle ':vcs_info:*' enable git cvs svn
-# zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-# zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:*:prompt:*' check-for-changes true
 
-# zstyle ':vcs_info:*:prompt:*' formats "/%S:%b:%u:%c"
-# zstyle ':vcs_info:*:prompt:*' actionformats '/%S:%b:%u:%c|%a'
-# # zstyle ':vcs_info:*' enable git cvs svn
-# # zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-# # zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-# zstyle ':vcs_info:*:prompt:*' check-for-changes true
+# zstyle ':vcs_info:*' formats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
 # zstyle ':vcs_info:*:prompt:*' unstagedstr 'u' #'¹'  # display ¹ if there are unstaged changes
-# zstyle ':vcs_info:*:prompt:*' stagedstr  'c'#'²'    # display ² if there are staged changes
-# # zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}//" "${FMT_PATH}"
-# # zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}//"              "${FMT_PATH}"
+# zstyle ':vcs_info:*:prompt:*' stagedstr  'c' #'²'    # display ² if there are staged changes
+# zstyle ':vcs_info:*:prompt:*' actionformats "${FMT_BRANCH}${FMT_ACTION}//" "${FMT_PATH}"
+# zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}//"              "${FMT_PATH}"
 # zstyle ':vcs_info:*:prompt:*' nvcsformats   ""                             "%~"
 
 
@@ -373,9 +347,11 @@ _org_pwd() {
     GIT_DIR=$(pwd | xargs dirname)
 }
 
-_update_rprompt () {
-    # 左プロンプトにRubyバージョン表記
-    PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} %{${reset_color}%}%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
+_update_prompt () {
+    # server用
+    PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
+    # client用
+    # PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     if [ ${vcs_info_msg_0_} ]; then
         if [[ -z $( git status 2>/dev/null | grep "fatal" ) ]]; then
             _check_git_status
@@ -389,19 +365,22 @@ _update_rprompt () {
 # プロンプトを再評価
 # setopt prompt_subst
 
+# カーソル位置は保持したままファ イル名一覧を順次その場で表示
+# setopt always_last_prompt
+
 
 precmd() {
     vcs_info 'prompt'
     _current_ruby_ver
     _git_info
-    _update_rprompt
+    _update_prompt
 }
 
 chpwd() {
     vcs_info 'prompt'
     _current_ruby_ver
     _git_info
-    _update_rprompt
+    _update_prompt
 }
 
 
