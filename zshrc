@@ -248,7 +248,9 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31
 # 大文字・小文字を区別しないで補完出来るようにするが、大文字を入力した場合は区別する
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-
+# 単語境界にならない記号
+# デフォルト => '*?_-.[]~=/&;!#$%^(){}<>'
+export WORDCHARS='*?[]~=&;!#$%^(){}<>'
 
 # # 通常
 # PROMPT="%/ %% "
