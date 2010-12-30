@@ -38,3 +38,8 @@ alias sc='./script/console'
 
 # rails3
 alias r='rails'
+
+# tscreen
+if [ $( which tscreen ) ]; then
+    alias screen='tscreen'
+fi
