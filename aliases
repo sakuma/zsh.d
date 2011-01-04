@@ -40,6 +40,6 @@ alias sc='./script/console'
 alias r='rails'
 
 # tscreen
-if [ $( which tscreen ) ]; then
+if test `which tscreen > /dev/null 2>&1` ; then
     alias screen='tscreen'
 fi
