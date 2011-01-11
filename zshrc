@@ -1,40 +1,9 @@
 # -*- mode:shell-script -*-
 
-### PATH
-## basic
-if [ -x /usr/libexec/path_helper ]; then
-    eval `/usr/libexec/path_helper -s`
-else
-    export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
-fi
+##
+# PATH
 
-## MacPorts
-# bin
-PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
-for port_path in ${PortsBinPaths[*]}; do
-    if [[ -d $( echo ${port_path} ) ]]; then
-        export PATH=${port_path}:$PATH
-    fi
-done
-# man
-if [[ -d /opt/local/share/man ]]; then
-    export MANPATH=/opt/local/share/man:$MANPATH
-fi
-
-## clojure
-# export CLOJURE_EXT=~/.clojure
-# export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0/clojure-contrib.jar
-# PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
-
-##  rvm (Ruby Version Manager)
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
-
-# RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
-# for RVM_PATH in ${RVM_PATHS[*]}; do
-#     if [[ -d $RVM_PATH ]]; then
-#         export PATH=$RVM_PATH:$PATH
-#     fi
-# done
+source $HOME/.zsh.d/paths
 
 
 # function gemdir {
@@ -106,43 +75,19 @@ export GREP_OPTIONS='--color=auto'
 # のようにすると、マッチした部分を赤い背景に白い文字で表示します。
 
 
-
-##############################################
-###
-#     Programing Language
-
-# Scheme
-SCHEME_LIBRARY_PATH="/usr/local/lib/slib/"
-export SCHEME_LIBRARY_PATH
-
-export CLASSPATH=/opt/local/share/java/clojure/lib/clojure.jar:/opt/local/share/java/clojure/lib/clojure-contrib.jar
-
-## Ruby
-# Gems
-# export PATH=$HOME/.gem/ruby/1.8/bin:$PATH
-#export PATH=/Library/Ruby/Gems/1.8/gems/ZenTest-4.2.1/bin:$PATH
-# export GEM_HOME=$HOME/.gem/ruby/1.8
-
-### require 'rubygems' を省略できる
-# export RUBYOPT=rubygems
-
-#export RUBYLIB=/opt/local/lib/ruby/gems/1.8/gems/ruby-graphviz-0.9.0/lib/:$RUBYLIB
-#export RUBYPATH=/opt/local/lib/ruby/gems/1.8/gems:$RUBYPATH
-#export RUBYPATH=/opt/local/lib/ruby/vendor_ruby/1.8
-#/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8/gems:$PATH
-
-
-
-
-
-
-
+##
 # コード補完
+
+# 拡張用の補完パス
+fpath=($HOME/.zsh.d/completions $fpath)
+
 autoload -U compinit
 compinit -u
 
+# フォーマット
 zstyle ':completion:*' list-colors 'di=36' 'ln=35'
 zstyle ':completion:*:default' menu select=1
+
 export LSCOLORS=gxfxcbdxbxegedabagacad
     # position: 1   5    0    5    0
 
@@ -243,7 +188,9 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31
 # 大文字・小文字を区別しないで補完出来るようにするが、大文字を入力した場合は区別する
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-
+# 単語境界にならない記号
+# デフォルト => '*?_-.[]~=/&;!#$%^(){}<>'
+export WORDCHARS='*?[]~=&;!#$%^(){}<>'
 
 # # 通常
 # PROMPT="%/ %% "
@@ -444,3 +391,5 @@ function cdup() {
 }
 zle -N cdup
 bindkey '^\^' cdup
+
+unsetopt extended_glob
