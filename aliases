@@ -5,6 +5,16 @@ alias ls='ls -GF'
 alias ll='ls -l'
 alias la='ls -A'
 
+function lsf {
+    find ./ -type f -depth 1 -exec basename {} \;
+}
+
+function lsd {
+    find ./ -type d -depth 1 -exec basename {} \;
+}
+
+
+
 # Macでの設定
 if [[ `uname` == "Darwin" ]]; then
     alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
