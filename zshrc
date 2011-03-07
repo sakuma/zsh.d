@@ -238,7 +238,7 @@ esac
 # vcs_infoを読み込む
 autoload -Uz vcs_info
 
-zstyle ':vcs_info:*' enable git cvs svn
+zstyle ':vcs_info:*' enable git cvs svn hg
 zstyle ':vcs_info:*:prompt:*' formats "/%S:%b:%u:%c"
 zstyle ':vcs_info:*' actionformats '/%S:%b|%a'
 zstyle ':vcs_info:*:prompt:*' check-for-changes true
