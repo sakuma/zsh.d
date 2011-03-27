@@ -282,7 +282,7 @@ _update_prompt () {
     if [[ $PROMPT_VIEW_MODE == 'client' ]]; then
         PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     else # server用
-        PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%} "
+        PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     fi
     if [ ${vcs_info_msg_0_} ]; then
         if [[ -z $( git status 2>/dev/null | grep "fatal" ) ]]; then
