@@ -1,6 +1,11 @@
 # -*- mode:shell-script -*-
 
 ##
+# VIEW MODE
+
+source $HOME/.zsh.d/config
+
+##
 # PATH
 
 source $HOME/.zsh.d/paths
@@ -295,10 +300,11 @@ _org_pwd() {
 }
 
 _update_prompt () {
-    # server用
-    PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
-    # client用
-    # PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
+    if [[ $PROMPT_VIEW_MODE == 'client' ]]; then
+        PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
+    else # server用
+        PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%} "
+    fi
     if [ ${vcs_info_msg_0_} ]; then
         if [[ -z $( git status 2>/dev/null | grep "fatal" ) ]]; then
             _check_git_status

@@ -1,0 +1,6 @@
+# -*- mode:shell-script -*-
+##
+# switch prompt view
+
+export PROMPT_VIEW_MODE='client'
+# or 'server'
