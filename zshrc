@@ -11,16 +11,6 @@ source $HOME/.zsh.d/config
 source $HOME/.zsh.d/paths
 
 
-# function gemdir {
-#   if [[ -z "$1" ]] ; then
-#     echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
-#   else
-#     rvm "$1"
-#     cd $(rvm gemdir)
-#     pwd
-#   fi
-# }
-
 function cd_gem_dir {
   if [[ -z "$1" ]] ; then
     echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
@@ -29,17 +19,6 @@ function cd_gem_dir {
     pwd
   fi
 }
-
-# function rvm_use {
-#     if [ -z "$1" ]; then
-#         echo "Ruby interpreter expects a parameter, which should be a valid RVM Ruby selector"
-#         echo "ex) % ru jruby"
-#     elif rvm use $1 ;then
-#         RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-#     else
-#         echo "or 'rvm list' "
-#     fi
-# }
 
 
 # EDITOR
