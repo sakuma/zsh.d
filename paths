@@ -19,6 +19,8 @@ for port_path in ${PortsBinPaths[*]}; do
     fi
 done
 
+DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib; export DYLD_FALLBACK_LIBRARY_PATH
+
 ##
 # man
 
