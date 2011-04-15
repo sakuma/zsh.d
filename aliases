@@ -22,7 +22,7 @@ if [[ `uname` == "Darwin" ]]; then
     alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
 fi
 
-alias emal='emacsclient'
+alias emal='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
 alias taif='tail -f'
 
 alias -g M="| $PAGER"
