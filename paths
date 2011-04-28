@@ -19,11 +19,11 @@ for port_path in ${PortsBinPaths[*]}; do
     fi
 done
 
-DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib; export DYLD_FALLBACK_LIBRARY_PATH
+if [[ -d /opt/local/lib ]]; then
+    DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib; export DYLD_FALLBACK_LIBRARY_PATH
+fi
 
-##
 # man
-
 if [[ -d /opt/local/share/man ]]; then
     export MANPATH=/opt/local/share/man:$MANPATH
 fi
@@ -39,14 +39,17 @@ fi
 
 # export CLOJURE_EXT=~/.clojure
 # PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
+if [[ -d /opt/local/share/java/clojure/lib/ ]]; then
+    export CLASSPATH=/opt/local/share/java/clojure/lib/clojure.jar:/opt/local/share/java/clojure/lib/clojure-contrib.jar
+fi
+
 
 ##
 # Scheme
+if [[ -d /usr/local/lib/slib/ ]]; then
+    export SCHEME_LIBRARY_PATH="/usr/local/lib/slib/"
+fi
 
-SCHEME_LIBRARY_PATH="/usr/local/lib/slib/"
-export SCHEME_LIBRARY_PATH
-
-export CLASSPATH=/opt/local/share/java/clojure/lib/clojure.jar:/opt/local/share/java/clojure/lib/clojure-contrib.jar
 
 ##
 # Ruby
@@ -78,7 +81,10 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 # Andoroid tools
 
 # for Mac
-export PATH=/Applications/android-sdk-mac_86/tools:$PATH
+if [[ -d /Applications/android-sdk-mac_86/tools ]]; then
+    export PATH=/Applications/android-sdk-mac_86/tools:$PATH
+fi
+
 
 
 ##
