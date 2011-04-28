@@ -82,6 +82,13 @@ export PATH=/Applications/android-sdk-mac_86/tools:$PATH
 
 
 ##
+# Emacs bin
+if [[ -d /Applications/Emacs.app/Contents/MacOS/bin ]]; then
+    export PATH=/Applications/Emacs.app/Contents/MacOS/bin:$PATH
+fi
+
+
+##
 # node.js
 
 export PATH=$HOME/.nodejs/bin:$PATH
