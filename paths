@@ -79,3 +79,14 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
 # for Mac
 export PATH=/Applications/android-sdk-mac_86/tools:$PATH
+
+
+##
+# node.js
+
+export PATH=$HOME/.nodejs/bin:$PATH
+
+# npm
+export NODE_PATH=$HOME/.nodejs/lib:$PATH
+export PATH=$HOME/.npm/bin:$PATH
+export MANPATH=$HOME/.npm/man:$MANPATH
