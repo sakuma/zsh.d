@@ -90,7 +90,7 @@ fi
 ##
 # Emacs bin
 if [[ -d /Applications/Emacs.app/Contents/MacOS/bin ]]; then
-    export PATH=/Applications/Emacs.app/Contents/MacOS/bin:$PATH
+    export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
 fi
 
 
