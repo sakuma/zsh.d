@@ -12,19 +12,17 @@ fi
 ##
 # MacPorts
 
-PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
-for port_path in ${PortsBinPaths[*]}; do
-    if [[ -d $( echo ${port_path} ) ]]; then
-        export PATH=${port_path}:$PATH
-    fi
-done
+if [[ -d /opt/local ]]; then
+    PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
+    for port_path in ${PortsBinPaths[*]}; do
+        if [[ -d $( echo ${port_path} ) ]]; then
+            export PATH=${port_path}:$PATH
+        fi
+    done
 
-if [[ -d /opt/local/lib ]]; then
     DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib; export DYLD_FALLBACK_LIBRARY_PATH
-fi
 
-# man
-if [[ -d /opt/local/share/man ]]; then
+    # man
     export MANPATH=/opt/local/share/man:$MANPATH
 fi
 
@@ -44,10 +42,23 @@ if [[ -d /opt/local/share/java/clojure/lib/ ]]; then
 fi
 
 
+if [[ -d /usr/local/Cellar/clojure-contrib/1.2.0 ]]; then
+    export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0/clojure-contrib.jar
+fi
+
+if [[ -d /opt/local/share/java/clojure/lib ]]; then
+    export CLASSPATH=$CLASSPATH:/opt/local/share/java/clojure/lib/clojure-contrib.jar
+fi
+
+
 ##
 # Scheme
 if [[ -d /usr/local/lib/slib/ ]]; then
     export SCHEME_LIBRARY_PATH="/usr/local/lib/slib/"
+fi
+
+if [[ -d /usr/local/lib/slib ]]; then
+    export SCHEME_LIBRARY_PATH=/usr/local/lib/slib/
 fi
 
 
@@ -82,24 +93,18 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 
 # for Mac
 if [[ -d /Applications/android-sdk-mac_86/tools ]]; then
-    export PATH=/Applications/android-sdk-mac_86/tools:$PATH
-fi
-
-
-
-##
-# Emacs bin
-if [[ -d /Applications/Emacs.app/Contents/MacOS/bin ]]; then
-    export PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin
+    export PATH=$PATH:/Applications/android-sdk-mac_86/tools
 fi
 
 
 ##
 # node.js
 
-export PATH=$HOME/.nodejs/bin:$PATH
+if [[ -d $HOME/.nodejs ]]; then
+    export PATH=$HOME/.nodejs/bin:$PATH
 
-# npm
-export NODE_PATH=$HOME/.nodejs/lib:$PATH
-export PATH=$HOME/.npm/bin:$PATH
-export MANPATH=$HOME/.npm/man:$MANPATH
+    # npm
+    export NODE_PATH=$HOME/.nodejs/lib:$PATH
+    export PATH=$HOME/.npm/bin:$PATH
+    export MANPATH=$HOME/.npm/man:$MANPATH
+fi
