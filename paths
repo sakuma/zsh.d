@@ -36,11 +36,6 @@ fi
 # clojure
 
 # export CLOJURE_EXT=~/.clojure
-# PATH=$PATH:/opt/local/share/java/clojure-contrib/launchers/bash
-if [[ -d /opt/local/share/java/clojure/lib/ ]]; then
-    export CLASSPATH=/opt/local/share/java/clojure/lib/clojure.jar:/opt/local/share/java/clojure/lib/clojure-contrib.jar
-fi
-
 
 if [[ -d /usr/local/Cellar/clojure-contrib/1.2.0 ]]; then
     export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0/clojure-contrib.jar
