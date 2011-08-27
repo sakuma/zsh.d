@@ -247,12 +247,7 @@ _check_git_status() {
     GIT_STATUS=$( git status 2>/dev/null )
     if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
         # on "zsh 4.3.10"
-        # GIT_LINE=$( echo $GIT_STATUS | wc -l)
-        if [[ -n $( uname -a | grep -i "linux" ) ]] ;then
-            GIT_LINE=$( echo $GIT_STATUS | wc -l )
-        else
-            GIT_LINE=$( echo $GIT_STATUS | wc -l | cut -c 8 )
-        fi
+        GIT_LINE=$( echo $GIT_STATUS | wc -l)
 
         if [[ $GIT_LINE == "2" ]]; then
              # ワーキングディレクトリがcleanな状態
