@@ -242,22 +242,48 @@ _git_info(){
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
-# ブランチの表示色の変更
+# ブランチの表示色の変更 : zsh 4.3.10 以上
 _check_git_status() {
     GIT_STATUS=$( git status 2>/dev/null )
-    if [[ -n $( echo $GIT_STATUS | grep "^nothing to commit (working directory clean)$" ) ]] ;then
-        # on "zsh 4.3.10"
-        GIT_LINE=$( echo $GIT_STATUS | wc -l)
+    GIT_STATUS_LINE=$( echo $GIT_STATUS | wc -l)
+    current_branch=$( git branch --contains | awk '{print $2}' )
+    head=$(git rev-parse HEAD)
+    BRANCH_COLOR=green
 
-        if [[ $GIT_LINE == "2" ]]; then
-             # ワーキングディレクトリがcleanな状態
-            BRANCH_CLOR=green
+    pushed="false"
+    for x in $(git rev-parse --remotes); do
+        if [[ $head == $x ]]; then
+            pushed="true"
+        fi
+    done
+
+    existes_remote_branch="false"
+    for remote_branch in $( git branch -r ); do
+        if [[ -n $( echo $remote_branch | grep $current_branch ) ]]; then
+            existes_remote_branch="true"
+        fi
+    done
+
+    if [[ $existes_remote_branch = "true" ]]; then
+        if [[ $pushed = "true" ]]; then
+            if [[ $GIT_STATUS_LINE = "2" ]]; then
+                BRANCH_COLOR=green
+            else
+                BRANCH_COLOR=red
+            fi
         else
-             # cleanだが、pushしてない or remoteとの差分コミットあり
-            BRANCH_CLOR=yellow
+            if [[ $GIT_STATUS_LINE = "4" ]]; then
+                BRANCH_COLOR=yellow
+            else
+                BRANCH_COLOR=red
+            fi
         fi
     else
-        BRANCH_CLOR=red
+        if [[ $GIT_STATUS_LINE = "2" ]]; then
+            BRANCH_COLOR=cyan
+        else
+            BRANCH_COLOR=red
+        fi
     fi
 }
 
@@ -269,10 +295,6 @@ _current_ruby_ver() {
     fi
 }
 
-_org_pwd() {
-    GIT_DIR=$(pwd | xargs dirname)
-}
-
 _update_prompt () {
     if [[ $PROMPT_VIEW_MODE == 'client' ]]; then
         PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
@@ -280,10 +302,10 @@ _update_prompt () {
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     fi
     if [ ${vcs_info_msg_0_} ]; then
-        if [[ -z $( git status 2>/dev/null | grep "fatal" ) ]]; then
+        if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
             _check_git_status
         fi
-        RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_CLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+        RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
     else
         RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
     fi
