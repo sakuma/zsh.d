@@ -297,6 +297,7 @@ _update_prompt () {
     fi
     if [ ${vcs_info_msg_0_} ]; then
         if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
+            _git_info
             _check_git_status
         fi
         RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
@@ -314,13 +315,11 @@ _update_prompt () {
 
 precmd() {
     vcs_info 'prompt'
-    _git_info
     _update_prompt
 }
 
 chpwd() {
     vcs_info 'prompt'
-    _git_info
     _update_prompt
 }
 
