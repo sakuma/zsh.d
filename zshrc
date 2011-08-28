@@ -287,15 +287,9 @@ _check_git_status() {
     fi
 }
 
-_current_ruby_ver() {
-    if [[ -s $HOME/.rvm/scripts/rvm ]]; then
-        RUBY_VER=$(~/.rvm/bin/rvm-prompt)
-    else
-        RUBY_VER=""
-    fi
-}
-
 _update_prompt () {
+    RUBY_VER=$(rvm-prompt 2&>/dev/null)
+
     if [[ $PROMPT_VIEW_MODE == 'client' ]]; then
         PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     else # server用
@@ -320,14 +314,12 @@ _update_prompt () {
 
 precmd() {
     vcs_info 'prompt'
-    _current_ruby_ver
     _git_info
     _update_prompt
 }
 
 chpwd() {
     vcs_info 'prompt'
-    _current_ruby_ver
     _git_info
     _update_prompt
 }
