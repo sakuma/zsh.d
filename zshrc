@@ -133,22 +133,22 @@ case ${UID} in
   SPROMPT="%B%{${fg[blue]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   ;;
 *)
-
-  # PROMPT="[%n@%m] %{${fg[blue]}%}#%{${reset_color}%} "
   PROMPT2="%B%{${fg[blue]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[white]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-  #RPROMPT="%{${fg[blue]}%}[%/]%{${reset_color}%}"
   ;;
 esac
 
 
 _update_prompt () {
-    RUBY_VER=$(rvm-prompt 2&>/dev/null)
 
+    # PROMPT 設定
+    RUBY_VER=$(rvm-prompt 2&>/dev/null)
     if [[ $PROMPT_VIEW_MODE = 'client' ]]; then
-        PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
-    else # server用
+        PROMPT="%{${fg[red]}%}$RUBY_VER%{${reset_color}%}%{${fg[green]}%}$%{${reset_color}%} "
+    elif [[ $PROMPT_VIEW_MODE = 'server' ]]; then
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
+    else # 未設定の場合
+        PROMPT="%{${fg[red]}%}$RUBY_VER%{${reset_color}%}%{${fg[green]}%}$%{${reset_color}%} "
     fi
 
     # RPROMPT 設定
