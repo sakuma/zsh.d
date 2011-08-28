@@ -150,11 +150,11 @@ _update_prompt () {
     else # server用
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     fi
-    if [ ${vcs_info_msg_0_} ]; then
-        if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
-            _git_info
-            _check_git_status
-        fi
+
+    # RPROMPT 設定
+    if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
+        _git_info
+        _check_git_status
         RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
     else
         RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
