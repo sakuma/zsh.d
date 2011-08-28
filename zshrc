@@ -145,7 +145,7 @@ esac
 _update_prompt () {
     RUBY_VER=$(rvm-prompt 2&>/dev/null)
 
-    if [[ $PROMPT_VIEW_MODE == 'client' ]]; then
+    if [[ $PROMPT_VIEW_MODE = 'client' ]]; then
         PROMPT="%{${fg[green]}%}$RUBY_VER$%{${reset_color}%} "
     else # server用
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
