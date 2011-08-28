@@ -40,6 +40,11 @@ source $HOME/.zsh.d/color
 
 
 ##
+# utils
+source $HOME/.zsh.d/utils
+
+
+##
 # コード補完
 
 # 拡張用の補完パス
@@ -278,28 +283,5 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
-
-# Google による検索
-function ggl() {
-    local str opt
-    if [ $# != 0 ]; then
-            for i in $*; do
-                str="$str+$i"
-            done
-            str=`echo $str | sed 's/^¥+//'`
-            opt='search?num=50&hl=ja&lr=lang_ja'
-            opt="${opt}&q=${str}"
-    fi
-    open http://www.google.com/$opt
-}
-
-# "Control-^" で parent directory へ移動
-function cdup() {
-    echo
-    cd ..
-    zle reset-prompt
-}
-zle -N cdup
-bindkey '^\^' cdup
 
 unsetopt extended_glob
