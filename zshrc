@@ -144,11 +144,12 @@ _update_prompt () {
     # PROMPT 設定
     RUBY_VER=$(rvm-prompt 2&>/dev/null)
     if [[ $PROMPT_VIEW_MODE = 'client' ]]; then
-        PROMPT="%{${fg[red]}%}$RUBY_VER%{${reset_color}%}%{${fg[green]}%}$%{${reset_color}%} "
+        PROMPT="%{${fg[green]}%}$RUBY_VER$ %{${reset_color}%}"
     elif [[ $PROMPT_VIEW_MODE = 'server' ]]; then
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     else # 未設定の場合
-        PROMPT="%{${fg[red]}%}$RUBY_VER%{${reset_color}%}%{${fg[green]}%}$%{${reset_color}%} "
+        echo "not setting config"
+        PROMPT="%{${fg[green]}%}$RUBY_VER$ %{${reset_color}%}"
     fi
 
     # RPROMPT 設定
