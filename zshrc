@@ -40,11 +40,6 @@ source $HOME/.zsh.d/color
 
 
 ##
-# utils
-source $HOME/.zsh.d/utils
-
-
-##
 # VSC (Git, SVN, ... more)
 source $HOME/.zsh.d/vcs_conf
 
@@ -219,3 +214,7 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 unsetopt extended_glob
+
+##
+# utils
+source $HOME/.zsh.d/utils
