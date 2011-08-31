@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 # フォーマット
 zstyle ':completion:*' list-colors 'di=36' 'ln=35'
 zstyle ':completion:*:default' menu select=1
