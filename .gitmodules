@@ -1,0 +1,3 @@
+[submodule "lib/git-svn"]
+	path = lib/git-svn
+	url = git://github.com/andrep/git-svn-clone-externals.git
