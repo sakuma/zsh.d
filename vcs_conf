@@ -19,7 +19,7 @@ zstyle ':vcs_info:*:prompt:*' check-for-changes true
 
 
 
-_git_info(){
+_vcs_info(){
     psvar=()
     LANG=en_US.UTF-8 vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
