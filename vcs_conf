@@ -28,7 +28,7 @@ _vcs_info(){
 _check_exist_branch_on_remote() {
     remote_branch_existed="false"
 
-    for remote_branch in $( git branch -r ); do
+    for remote_branch in $( git branch -r 2>/dev/null); do
         if [[ -n $( echo $remote_branch | grep $current_branch ) ]]; then
             remote_branch_existed="true"
         fi
@@ -39,38 +39,42 @@ _check_exist_branch_on_remote() {
 _check_git_status() {
     GIT_STATUS=$( git status 2>/dev/null )
     GIT_STATUS_LINE=$( echo $GIT_STATUS | wc -l)
-    current_branch=$( git branch --contains | awk '{print $2}' )
-    head=$(git rev-parse HEAD)
-    BRANCH_COLOR=green
+    BRANCH_COLOR=red
 
     pushed="false"
-    for x in $(git rev-parse --remotes); do
-        if [[ $head == $x ]]; then
-            pushed="true"
-        fi
-    done
+    repository_error=$(git rev-parse HEAD 2>/dev/null)
+    if [[ $(echo $?) = "0" ]]; then 
+        current_branch=$( git branch --contains | awk '{print $2}' )
+        head=$(git rev-parse HEAD 2&>/dev/null)
 
-    _check_exist_branch_on_remote
+        for x in $(git rev-parse --remotes); do
+            if [[ $head == $x ]]; then
+                pushed="true"
+            fi
+        done
 
-    if [[ $remote_branch_existed = "true" ]]; then
-        if [[ $pushed = "true" ]]; then
+        _check_exist_branch_on_remote
+    
+        if [[ $remote_branch_existed = "true" ]]; then
+            if [[ $pushed = "true" ]]; then
+                if [[ $GIT_STATUS_LINE = "2" ]]; then
+                    BRANCH_COLOR=green
+                else
+                    BRANCH_COLOR=red
+                fi
+            else
+                if [[ $GIT_STATUS_LINE = "4" ]]; then
+                    BRANCH_COLOR=yellow
+                else
+                    BRANCH_COLOR=red
+                fi
+            fi
+        else
             if [[ $GIT_STATUS_LINE = "2" ]]; then
-                BRANCH_COLOR=green
+                BRANCH_COLOR=cyan
             else
                 BRANCH_COLOR=red
             fi
-        else
-            if [[ $GIT_STATUS_LINE = "4" ]]; then
-                BRANCH_COLOR=yellow
-            else
-                BRANCH_COLOR=red
-            fi
-        fi
-    else
-        if [[ $GIT_STATUS_LINE = "2" ]]; then
-            BRANCH_COLOR=cyan
-        else
-            BRANCH_COLOR=red
         fi
     fi
 }
