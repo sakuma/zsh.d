@@ -49,6 +49,11 @@ alias sdb='ruby script/dbconsole'
 
 # rails3
 alias r='rails'
+alias be='bundle exec'
+alias ber='bundle exec rails'
+alias berk='bundle exec rake'
+alias py='pry -r ./config/environment'
+alias bpy='bundle exec pry -r ./config/environment'
 
 # tscreen
 if [[ -x /usr/bin/tscreen ]]; then
