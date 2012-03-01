@@ -12,7 +12,7 @@ fi
 ## 
 #  my program
 if [ -x ~/bin ]; then
-    export PATH=$PATH:~/bin
+    export PATH=~/bin:$PATH
 fi
 
 ##
