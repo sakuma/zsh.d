@@ -22,7 +22,7 @@ if [[ -d /opt/local ]]; then
     PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
     for port_path in ${PortsBinPaths[*]}; do
         if [[ -d $( echo ${port_path} ) ]]; then
-            export PATH=${port_path}:$PATH
+            export PATH=$PATH:${port_path}
         fi
     done
 
