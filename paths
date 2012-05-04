@@ -107,15 +107,6 @@ fi
 ##
 # node.js
 
-if [[ -d $HOME/.nodejs ]]; then
-    export PATH=$HOME/.nodejs/bin:$PATH
-
-    # npm
-    export NODE_PATH=$HOME/.nodejs/lib:$PATH
-    export PATH=$HOME/.npm/bin:$PATH
-    export MANPATH=$HOME/.npm/man:$MANPATH
-fi
-
 if [[ -d $HOME/.nodebrew ]]; then
     export PATH=$PATH:$HOME/.nodebrew/current/bin
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules:$NODE_PATH
