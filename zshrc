@@ -222,3 +222,21 @@ unsetopt extended_glob
 ##
 # utils
 source $HOME/.zsh.d/utils
+
+##
+# rvm setting for Lion
+
+# put MacPorts-specific compiler flags in .rvmrc:
+# Make this work with OS X Lion... for now...
+if [[ `uname -v` =~ "Darwin Kernel Version 11" ]] ; then
+  export CC=/usr/bin/gcc-4.2
+  #export CC=/usr/bin/i686-apple-darwin11-gcc-4.2.1
+fi
+
+# Export compile flags for MacPorts:
+if [ -d /opt/local/bin ] ; then
+  export CFLAGS="-O2 -arch x86_64"
+  export LDFLAGS="-L/opt/local/lib"
+  export CPPFLAGS="-I/opt/local/include"
+fi
+
