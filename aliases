@@ -1,7 +1,7 @@
 # -*- mode:shell-script -*-
 
 alias l="ls -lAh"
-alias ls='ls -GF'
+alias ls='ls -F --color=auto'
 alias ll='ls -l'
 alias la='ls -A'
 
