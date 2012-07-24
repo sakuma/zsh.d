@@ -20,6 +20,9 @@ if [[ `uname` == "Darwin" ]]; then
     alias ema='/Applications/Emacs.app/Contents/MacOS/Emacs'
     alias freemind='/Applications/FreeMind.app/Contents/MacOS/JavaApplicationStub'
     alias astah='java -Xmx256m -Xss2m -jar /Applications/astah_community/astah-community.jar'
+    if [[ -x /opt/local/bin/zsh ]]; then
+      alias zsh='/opt/local/bin/zsh'
+    fi
 fi
 
 if [[ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ]]; then
