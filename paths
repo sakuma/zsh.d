@@ -98,9 +98,10 @@ if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 # Andoroid tools
 
 # for Mac
-if [[ -d /Applications/android-sdk/r18 ]]; then
-    export PATH=$PATH:/Applications/android-sdk/r18/platform-tools
-    export PATH=$PATH:/Applications/android-sdk/r18/tools
+AndroidSDKRevision=r20
+if [[ -d /Applications/AndroidSDK/$AndroidSDKRevision ]]; then
+    export PATH=$PATH:/Applications/AndroidSDK/$AndroidSDKRevision/platform-tools
+    export PATH=$PATH:/Applications/AndroidSDK/$AndroidSDKRevision/tools
 fi
 
 
