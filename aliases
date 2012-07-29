@@ -23,6 +23,9 @@ if [[ `uname` == "Darwin" ]]; then
     if [[ -x /opt/local/bin/zsh ]]; then
       alias zsh='/opt/local/bin/zsh'
     fi
+    if [[ -x /opt/local/bin/vim ]]; then
+      alias vim='/opt/local/bin/vim'
+    fi
 fi
 
 if [[ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ]]; then
