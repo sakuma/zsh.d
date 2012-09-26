@@ -4,6 +4,7 @@
 # basic
 
 if [ -x /usr/libexec/path_helper ]; then
+    # /etc/paths を修正して優先順位を決める
     eval `/usr/libexec/path_helper -s`
 else
     export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
