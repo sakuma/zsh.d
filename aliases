@@ -25,6 +25,7 @@ fi
 if [[ -x /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ]]; then
   alias emal='/Applications/Emacs.app/Contents/MacOS/bin/emacsclient'
 fi
+
 alias taif='tail -f'
 
 alias -g M="| $PAGER"

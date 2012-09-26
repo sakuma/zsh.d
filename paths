@@ -12,8 +12,8 @@ fi
 
 ##
 #  my program
-if [ -x ~/bin ]; then
-    export PATH=~/bin:$PATH
+if [ -x ‾/bin ]; then
+    export PATH=‾/bin:$PATH
 fi
 
 ##
@@ -53,7 +53,7 @@ fi
 ##
 # clojure
 
-# export CLOJURE_EXT=~/.clojure
+# export CLOJURE_EXT=‾/.clojure
 
 if [[ -d /usr/local/Cellar/clojure-contrib/1.2.0 ]]; then
     export CLASSPATH=$CLASSPATH:/usr/local/Cellar/clojure-contrib/1.2.0/clojure-contrib.jar
