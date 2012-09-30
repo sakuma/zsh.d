@@ -12,8 +12,8 @@ fi
 
 ##
 #  my program
-if [ -x ‾/bin ]; then
-    export PATH=‾/bin:$PATH
+if [ -x $HOME/bin ]; then
+    export PATH=$HOME/bin:$PATH
 fi
 
 ##
