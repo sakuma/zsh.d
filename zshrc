@@ -49,6 +49,7 @@ source $HOME/.zsh.d/vcs_conf
 
 # 拡張用の補完パス
 fpath=($HOME/.zsh.d/completions $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload -U compinit
 compinit -u
