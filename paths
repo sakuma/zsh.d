@@ -70,16 +70,12 @@ if [[ -d /usr/local/lib/slib/ ]]; then
     export SCHEME_LIBRARY_PATH="/usr/local/lib/slib/"
 fi
 
-if [[ -d /usr/local/lib/slib ]]; then
-    export SCHEME_LIBRARY_PATH=/usr/local/lib/slib/
-fi
-
 
 ##
 # Ruby
 
 ##  rvm (Ruby Version Manager)
-if [[ -s $HOME/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/extras/rails" ]] && . "$HOME/.rvm/scripts/extras/rails"
 
 # RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
