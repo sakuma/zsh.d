@@ -41,8 +41,8 @@ fi
 #     export PATH=/opt/local/libexec/gnubin:$PATH
 # fi
 # for homebrew
-if [[ -d /usr/local/Cellar/coreutils/8.19/libexec/gnubin ]]; then
-    export PATH=/usr/local/Cellar/coreutils/8.19/libexec/gnubin:$PATH
+if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
+    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 fi
 
 ##############################################
