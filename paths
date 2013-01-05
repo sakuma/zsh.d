@@ -118,3 +118,7 @@ if [[ -d $HOME/.nodebrew ]]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib:$NODE_PATH
 fi
 
+##
+# Python
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
