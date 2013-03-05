@@ -237,7 +237,7 @@ source $HOME/.zsh.d/utils
 
 # put MacPorts-specific compiler flags in .rvmrc:
 # Make this work with OS X Lion... for now...
-if [[ `uname -v` =~ "Darwin Kernel Version 11" ]] ; then
+if [[ `uname` =~ "Darwin" ]] ; then
   export CC=/usr/bin/gcc-4.2
   #export CC=/usr/bin/i686-apple-darwin11-gcc-4.2.1
 fi
