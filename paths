@@ -7,13 +7,13 @@ if [ -x /usr/libexec/path_helper ]; then
     # /etc/paths を修正して優先順位を決める
     eval `/usr/libexec/path_helper -s`
 else
-    export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$PATH
 fi
 
 ##
 #  my program
 if [ -x $HOME/bin ]; then
-    export PATH=$HOME/bin:$PATH
+    PATH=$HOME/bin:$PATH
 fi
 
 ##
@@ -23,7 +23,7 @@ if [[ -d /opt/local ]]; then
     PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
     for port_path in ${PortsBinPaths[*]}; do
         if [[ -d $( echo ${port_path} ) ]]; then
-            export PATH=$PATH:${port_path}
+            PATH=$PATH:${port_path}
         fi
     done
 
@@ -42,7 +42,7 @@ fi
 # fi
 # for homebrew
 if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
-    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 fi
 
 ##############################################
@@ -104,8 +104,8 @@ fi
 # for Mac
 AndroidSDKRevision=r20
 if [[ -d /Applications/AndroidSDK/$AndroidSDKRevision ]]; then
-    export PATH=$PATH:/Applications/AndroidSDK/$AndroidSDKRevision/platform-tools
-    export PATH=$PATH:/Applications/AndroidSDK/$AndroidSDKRevision/tools
+    PATH=$PATH:/Applications/AndroidSDK/$AndroidSDKRevision/platform-tools
+    PATH=$PATH:/Applications/AndroidSDK/$AndroidSDKRevision/tools
 fi
 
 
@@ -113,7 +113,7 @@ fi
 # node.js
 
 if [[ -d $HOME/.nodebrew ]]; then
-    export PATH=$PATH:$HOME/.nodebrew/current/bin
+    PATH=$PATH:$HOME/.nodebrew/current/bin
     export NODE_PATH=$HOME/.nodebrew/current/lib/node_modules:$NODE_PATH
     export NODE_PATH=$HOME/.nodebrew/current/lib:$NODE_PATH
 fi
@@ -122,3 +122,4 @@ fi
 # Python
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
+export PATH
