@@ -120,6 +120,14 @@ fi
 
 ##
 # Python
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
+# for Homebrew
+if [[ -d /usr/local/share/python ]]; then
+    PATH=$PATH:/usr/local/share/python
+fi
+
+if [[ -d /usr/local/lib/python2.7/site-packages ]]; then
+    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+fi
 
 export PATH
