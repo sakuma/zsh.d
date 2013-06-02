@@ -1,5 +1,31 @@
 # -*- mode:shell-script -*-
 
+#   typeset
+#    -U 重複パスを登録しない
+#    -x exportも同時に行う
+#    -T 環境変数へ紐付け
+#
+#   path=xxxx(N-/)
+#     (N-/): 存在しないディレクトリは登録しない
+#     パス(...): ...という条件にマッチするパスのみ残す
+#        N: NULL_GLOBオプションを設定。
+#           globがマッチしなかったり存在しないパスを無視する
+#        -: シンボリックリンク先のパスを評価
+#        /: ディレクトリのみ残す
+#        .: 通常のファイルのみ残す
+
+
+## 重複パスを登録しない
+typeset -U path cdpath fpath manpath
+
+## sudo用のpathを設定
+typeset -xT SUDO_PATH sudo_path
+typeset -U sudo_path
+sudo_path=({/usr/local,/usr,}/sbin(N-/))
+
+## pathを設定
+path=(~/bin(N-/) /usr/local/bin(N-/) ${path})
+
 ##
 # basic
 
