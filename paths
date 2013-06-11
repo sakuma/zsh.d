@@ -144,6 +144,12 @@ if [[ -d $HOME/.nodebrew ]]; then
     export NODE_PATH=$HOME/.nodebrew/current/lib:$NODE_PATH
 fi
 
+# npm
+if [[ -d /usr/local/share/npm/bin ]]; then
+    PATH=$PATH:/usr/local/share/npm/bin
+fi
+
+
 ##
 # Python
 
