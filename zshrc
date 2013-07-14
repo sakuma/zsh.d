@@ -59,6 +59,8 @@ compinit -u
 # 文字列
 export LANG=ja_JP.UTF-8
 # export LANG=ja_JP.eucJP
+export KCODE=u           # KCODEにUTF-8を設定
+export AUTOFEATURE=true  # autotestでfeatureを動かす
 
 ## auto change directory
 setopt auto_cd
@@ -99,6 +101,8 @@ setopt rc_quotes
 
 # 補完で末尾に補われた / が自動的に 削除される
 setopt auto_remove_slash
+
+setopt magic_equal_subst # =以降も補完する(--prefix=/usrなど)
 
 # lsコマンドの補完候補にも色付き表示
 # eval `dircolors`
