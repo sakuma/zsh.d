@@ -52,6 +52,16 @@ fpath=($HOME/.zsh.d/completions $fpath)
 fpath=(/usr/local/share/zsh-completions $fpath)
 # rm $(brew --prefix)/share/zsh/site-functions/_git
 
+# auto-fu.zsh
+if [ -f ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+fi
+
 autoload -U compinit
 compinit -u
 

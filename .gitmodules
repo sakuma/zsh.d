@@ -1,3 +1,6 @@
 [submodule "lib/git-svn"]
 	path = lib/git-svn
 	url = git://github.com/andrep/git-svn-clone-externals.git
+[submodule "lib/auto-fu.zsh"]
+	path = lib/auto-fu.zsh
+	url = git@github.com:hchbaw/auto-fu.zsh.git
