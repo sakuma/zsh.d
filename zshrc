@@ -62,6 +62,13 @@ if [ -f ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh ]; then
     zstyle ':completion:*' completer _oldlist _complete
 fi
 
+# autojump
+if [ -s `brew --prefix`/etc/autojump.sh ]; then
+  . `brew --prefix`/etc/autojump.sh
+else
+  echo "-> brew install autojump"
+fi
+
 autoload -U compinit
 compinit -u
 
