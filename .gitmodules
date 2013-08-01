@@ -4,3 +4,6 @@
 [submodule "lib/auto-fu.zsh"]
 	path = lib/auto-fu.zsh
 	url = git@github.com:hchbaw/auto-fu.zsh.git
+[submodule "lib/zaw"]
+	path = lib/zaw
+	url = git@github.com:zsh-users/zaw.git

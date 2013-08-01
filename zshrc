@@ -53,13 +53,28 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # rm $(brew --prefix)/share/zsh/site-functions/_git
 
 # auto-fu.zsh
-if [ -f ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
+# if [ -f ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh ]; then
+#     source ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh
+#     function zle-line-init () {
+#         auto-fu-init
+#     }
+#     zle -N zle-line-init
+#     zstyle ':completion:*' completer _oldlist _complete
+# fi
+
+
+# zaw.zsh
+# http://shibayu36.hatenablog.com/entry/20120130/1327937835
+if [ -s $HOME/.zsh.d/lib/zaw/zaw.zsh ]; then
+  # autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+  # add-zsh-hook chpwd chpwd_recent_dirs
+  # zstyle ':chpwd:*' recent-dirs-max 5000
+  # zstyle ':chpwd:*' recent-dirs-default yes
+  # zstyle ':completion:*' recent-dirs-insert both
+
+  source $HOME/.zsh.d/lib/zaw/zaw.zsh
+  zstyle ':filter-select' case-insensitive yes # 絞り込みをcase-insensitiveに
+  # bindkey '^@' zaw-cdr # zaw-cdrをbindkey
 fi
 
 # autojump
