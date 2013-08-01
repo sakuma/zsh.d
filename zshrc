@@ -246,11 +246,11 @@ setopt inc_append_history
 
 ## Emacs Like keybind
 #
-bindkey -e
+# bindkey -e
 
 ## Vi like
 #
-# bindkey -v
+bindkey -v
 
 
 compinit -d $HOME/.zsh.d/.zcompdump
