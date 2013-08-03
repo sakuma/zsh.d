@@ -85,11 +85,16 @@ if [ -s $HOME/.zsh.d/lib/zaw/zaw.zsh ]; then
   bindkey '^O' zaw-open-file
 fi
 
-# autojump
-if [ -s `brew --prefix`/etc/autojump.sh ]; then
-  . `brew --prefix`/etc/autojump.sh
+# z (replace 'autojump')
+if [ -s $HOME/.zsh.d/lib/z/z.sh ]; then
+  export _Z_CMD=j
+  if [ ! -s $HOME/.zsh.d/z_data ]; then
+    touch $HOME/.zsh.d/z_data
+  fi
+  export _Z_DATA=$HOME/.zsh.d/z_data
+  . $HOME/.zsh.d/lib/z/z.sh
 else
-  echo "-> brew install autojump"
+  echo "update submodules..."
 fi
 
 autoload -U compinit
@@ -217,6 +222,9 @@ _update_prompt () {
 precmd() {
     vcs_info 'prompt'
     _update_prompt
+    if [ -s $HOME/.zsh.d/lib/z/z.sh ]; then
+      j --add "$(pwd -P)"
+    fi
 }
 
 chpwd() {

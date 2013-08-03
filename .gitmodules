@@ -7,3 +7,6 @@
 [submodule "lib/zaw"]
 	path = lib/zaw
 	url = git@github.com:zsh-users/zaw.git
+[submodule "lib/z"]
+	path = lib/z
+	url = git@github.com:rupa/z.git
