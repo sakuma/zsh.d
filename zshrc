@@ -269,8 +269,6 @@ setopt inc_append_history
 bindkey -v
 
 
-compinit -d $ZSH_HOME/.zcompdump
-
 ## historical backward/forward search with linehead string binded to ^P/^N
 #
 autoload history-search-end

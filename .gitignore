@@ -1,5 +1,7 @@
-history
-.zcompdump
-history.*
+history*
 config
 z_data
+
+# dotfiles
+.zcompdump
+.chpwd-recent-dirs

@@ -1,6 +1,8 @@
 # -*- mode:shell-script -*-
 
 ZSH_HOME=$HOME/.zsh.d
+ZDOTDIR=$ZSH_HOME
+
 source ~/.zsh.d/zshrc
 
 # if [ -f ~/.zshrc ] ; then
