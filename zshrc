@@ -64,13 +64,12 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 
 # zaw.zsh
-# http://shibayu36.hatenablog.com/entry/20120130/1327937835
 if [ -s $HOME/.zsh.d/lib/zaw/zaw.zsh ]; then
-  # autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-  # add-zsh-hook chpwd chpwd_recent_dirs
-  # zstyle ':chpwd:*' recent-dirs-max 5000
-  # zstyle ':chpwd:*' recent-dirs-default yes
-  # zstyle ':completion:*' recent-dirs-insert both
+  autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+  add-zsh-hook chpwd chpwd_recent_dirs
+  zstyle ':chpwd:*' recent-dirs-max 5000
+  zstyle ':chpwd:*' recent-dirs-default yes
+  zstyle ':completion:*' recent-dirs-insert both
 
   source $HOME/.zsh.d/lib/zaw/zaw.zsh
   zstyle ':filter-select' case-insensitive yes
@@ -80,7 +79,8 @@ if [ -s $HOME/.zsh.d/lib/zaw/zaw.zsh ]; then
   # zstyle ':filter-select' max-lines -10 # use $LINES - 10 for filter-select
   # zstyle ':filter-select' extended-search yes # see below
 
-  # bindkey '^@' zaw-cdr # zaw-cdrをbindkey
+  bindkey '^B' zaw-cdr # Ctrl - b
+  # bindkey '^[@' zaw-cdr # M-@
   bindkey '^R' zaw-history
   bindkey '^O' zaw-open-file
 fi
