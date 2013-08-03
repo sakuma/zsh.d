@@ -3,12 +3,12 @@
 ##
 # VIEW MODE
 
-source $HOME/.zsh.d/config
+source $ZSH_HOME/config
 
 ##
 # PATH
 
-source $HOME/.zsh.d/paths
+source $ZSH_HOME/paths
 
 
 function cd_gem_dir {
@@ -31,24 +31,24 @@ fi
 
 ###
 # Alias
-source $HOME/.zsh.d/aliases
+source $ZSH_HOME/aliases
 
 
 ###
 # 色関連
-source $HOME/.zsh.d/color
+source $ZSH_HOME/color
 
 
 ##
 # VSC (Git, SVN, ... more)
-source $HOME/.zsh.d/vcs_conf
+source $ZSH_HOME/vcs_conf
 
 
 ##
 # コード補完
 
 # 拡張用の補完パス
-fpath=($HOME/.zsh.d/completions $fpath)
+fpath=($ZSH_HOME/completions $fpath)
 fpath=(/usr/local/share/zsh-completions $fpath)
 # rm $(brew --prefix)/share/zsh/site-functions/_git
 
@@ -64,14 +64,14 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 
 # zaw.zsh
-if [ -s $HOME/.zsh.d/lib/zaw/zaw.zsh ]; then
+if [ -s $ZSH_HOME/lib/zaw/zaw.zsh ]; then
   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
   add-zsh-hook chpwd chpwd_recent_dirs
   zstyle ':chpwd:*' recent-dirs-max 5000
   zstyle ':chpwd:*' recent-dirs-default yes
   zstyle ':completion:*' recent-dirs-insert both
 
-  source $HOME/.zsh.d/lib/zaw/zaw.zsh
+  source $ZSH_HOME/lib/zaw/zaw.zsh
   zstyle ':filter-select' case-insensitive yes
   zstyle ':filter-select' rotate-list yes # enable rotation for filter-select
   # zstyle ':filter-select:highlight' matched fg=yellow,standout
@@ -86,13 +86,13 @@ if [ -s $HOME/.zsh.d/lib/zaw/zaw.zsh ]; then
 fi
 
 # z (replace 'autojump')
-if [ -s $HOME/.zsh.d/lib/z/z.sh ]; then
+if [ -s $ZSH_HOME/lib/z/z.sh ]; then
   export _Z_CMD=j
-  if [ ! -s $HOME/.zsh.d/z_data ]; then
-    touch $HOME/.zsh.d/z_data
+  if [ ! -s $ZSH_HOME/z_data ]; then
+    touch $ZSH_HOME/z_data
   fi
-  export _Z_DATA=$HOME/.zsh.d/z_data
-  . $HOME/.zsh.d/lib/z/z.sh
+  export _Z_DATA=$ZSH_HOME/z_data
+  . $ZSH_HOME/lib/z/z.sh
 else
   echo "update submodules..."
 fi
@@ -222,7 +222,7 @@ _update_prompt () {
 precmd() {
     vcs_info 'prompt'
     _update_prompt
-    if [ -s $HOME/.zsh.d/lib/z/z.sh ]; then
+    if [ -s $ZSH_HOME/lib/z/z.sh ]; then
       j --add "$(pwd -P)"
     fi
 }
@@ -236,7 +236,7 @@ chpwd() {
 
 ## Command history configuration
 #
-HISTFILE=$HOME/.zsh.d/history
+HISTFILE=$ZSH_HOME/history
 HISTSIZE=10000
 SAVEHIST=10000
 # export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S  '
@@ -269,7 +269,7 @@ setopt inc_append_history
 bindkey -v
 
 
-compinit -d $HOME/.zsh.d/.zcompdump
+compinit -d $ZSH_HOME/.zcompdump
 
 ## historical backward/forward search with linehead string binded to ^P/^N
 #
@@ -283,7 +283,7 @@ unsetopt extended_glob
 
 ##
 # utils
-source $HOME/.zsh.d/utils
+source $ZSH_HOME/utils
 
 ##
 # rvm setting for Lion
