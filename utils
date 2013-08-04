@@ -62,7 +62,7 @@ function ls_abbrev() {
     fi
 }
 
-function do_enter() {
+function get_git_status() {
     if [ -n "$BUFFER" ]; then
         zle accept-line
         return 0
@@ -79,9 +79,9 @@ function do_enter() {
     zle reset-prompt
     return 0
 }
-zle -N do_enter
-# Cmd+Space
-bindkey '^@' do_enter
+zle -N get_git_status
+# Ctrl+Space
+bindkey '^@' get_git_status
 
 
 ##
