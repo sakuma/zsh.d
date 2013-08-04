@@ -45,6 +45,13 @@ alias gish='git push'
 alias gic='git commit'
 alias gicl='git clone'
 
+which hub > /dev/null
+if [ $? = 0 ]; then
+  alias git=hub
+else
+  echo "Not installed 'hub'"
+fi
+
 # rails2
 # alias ss='ruby script/server'
 # alias ssu='ruby script/server -u'
