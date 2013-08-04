@@ -1,3 +1,4 @@
+# vim: ft=zsh
 #---- プロンプト設定 ------#
 # 左プロンプト
 PROMPT='[%n@%m %~]${WINDOW:+"[$WINDOW]"}%# '

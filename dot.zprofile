@@ -1,3 +1,4 @@
+# vim: ft=zsh
 # -*- mode:shell-script -*-
 
 ZSH_HOME=$HOME/.zsh.d

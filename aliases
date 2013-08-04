@@ -1,3 +1,4 @@
+# vim: ft=zsh
 # -*- mode:shell-script -*-
 
 alias l="ls -lAh"

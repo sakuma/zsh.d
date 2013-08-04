@@ -1,3 +1,4 @@
+# vim: ft=zsh
 # -*- mode: shell-script -*-
 
 # Gitのブランチ名をRPROMPTに表示する --- vcs_info(zshの組み込み関数)を使う
