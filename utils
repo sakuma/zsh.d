@@ -125,15 +125,4 @@ if [ -s $ZSH_HOME/lib/zaw/zaw.zsh ]; then
   bindkey '^O' zaw-open-file
 fi
 
-# z (replace 'autojump')
-if [ -s $ZSH_HOME/lib/z/z.sh ]; then
-  export _Z_CMD=j
-  if [ ! -s $ZSH_HOME/z_data ]; then
-    touch $ZSH_HOME/z_data
-  fi
-  export _Z_DATA=$ZSH_HOME/z_data
-  . $ZSH_HOME/lib/z/z.sh
-else
-  echo "update submodules..."
-fi
 

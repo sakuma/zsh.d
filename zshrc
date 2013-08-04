@@ -174,9 +174,6 @@ _update_prompt () {
 precmd() {
     vcs_info 'prompt'
     _update_prompt
-    if [ -s $ZSH_HOME/lib/z/z.sh ]; then
-      j --add "$(pwd -P)"
-    fi
 }
 
 chpwd() {
