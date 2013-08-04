@@ -1,6 +1,6 @@
 # vim: ft=zsh
 # -*- mode: shell-script -*-
-
+#
 # Google による検索
 function ggl() {
     if [[ $(uname) = "Darwin" ]]; then
@@ -89,18 +89,23 @@ bindkey '^@' get_git_status
 
 # 拡張用の補完パス
 fpath=($ZSH_HOME/completions $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
+# fpath=(/usr/local/share/zsh-completions $fpath)
 # rm $(brew --prefix)/share/zsh/site-functions/_git
 
 # auto-fu.zsh
-# if [ -f ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh ]; then
-#     source ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh
-#     function zle-line-init () {
-#         auto-fu-init
-#     }
-#     zle -N zle-line-init
-#     zstyle ':completion:*' completer _oldlist _complete
-# fi
+if [ -f ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh.d/lib/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+        # afu-register-zle-eof
+    }
+    zle -N zle-line-init
+    zle -N afu-register-zle-eof
+    # setopt ignoreeof
+    zstyle ':completion:*' completer _oldlist _complete
+    zstyle ':auto-fu:var' postdisplay $''
+    # zstyle ':auto-fu:var' enable magic-space
+fi
 
 
 # zaw.zsh
@@ -117,9 +122,12 @@ if [ -s $ZSH_HOME/lib/zaw/zaw.zsh ]; then
   # zstyle ':filter-select:highlight' matched fg=yellow,standout
   # zstyle ':filter-select' max-lines 10 # use 10 lines for filter-select
   # zstyle ':filter-select' max-lines -10 # use $LINES - 10 for filter-select
-  # zstyle ':filter-select' extended-search yes # see below
+  zstyle ':filter-select' extended-search yes # see below
 
-  bindkey '^B' zaw-cdr # Ctrl - b
+  # bindkey '^B' zaw-cdr # Ctrl - b
+  bindkey '^[' zaw-cdr # Ctrl - b
+  # bindkey '^@' zaw-cdr # Ctrl - b
+  # bindkey '^[B' zaw-cdr # Ctrl - b
   # bindkey '^[@' zaw-cdr # M-@
   bindkey '^R' zaw-history
   bindkey '^O' zaw-open-file
