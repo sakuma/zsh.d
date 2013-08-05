@@ -104,6 +104,8 @@ if [ -f $ZSH_HOME/lib/auto-fu.zsh/auto-fu.zsh ]; then
     # zstyle ':auto-fu:var' disable magic-space
     zstyle ':auto-fu:var' disable all
     zstyle ':auto-fu:highlight' completion
+else
+  echo "Not found 'auto-fu', -> 'git submodule init; git submodule update'"
 fi
 
 
@@ -126,6 +128,8 @@ if [ -s $ZSH_HOME/lib/zaw/zaw.zsh ]; then
   bindkey '^X' zaw-cdr # Ctrl - x
   bindkey '^R' zaw-history
   bindkey '^O' zaw-open-file
+else
+  echo "Not found 'zaw', -> 'git submodule init; git submodule update'"
 fi
 
 
