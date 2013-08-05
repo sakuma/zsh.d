@@ -43,34 +43,9 @@ if [ -x $HOME/bin ]; then
     PATH=$HOME/bin:$PATH
 fi
 
-##
-# MacPorts
+# Each env path
+source $ZSH_HOME/environments/path.$(uname)
 
-if [[ -d /opt/local ]]; then
-    PortsBinPaths=( "/opt/local/bin" "/opt/local/sbin" )
-    for port_path in ${PortsBinPaths[*]}; do
-        if [[ -d $( echo ${port_path} ) ]]; then
-            PATH=$PATH:${port_path}
-        fi
-    done
-
-    # DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib; export DYLD_FALLBACK_LIBRARY_PATH
-
-    # man
-    export MANPATH=/opt/local/share/man:$MANPATH
-fi
-
-##
-# coreutils
-#
-# for Macports
-# if [[ -d /opt/local/libexec/gnubin ]]; then
-#     export PATH=/opt/local/libexec/gnubin:$PATH
-# fi
-# for homebrew
-if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-fi
 
 ##############################################
 ##

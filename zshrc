@@ -6,12 +6,6 @@
 
 source $ZSH_HOME/config
 
-##
-# PATH
-
-source $ZSH_HOME/paths
-
-
 function cd_gem_dir {
   if [[ -z "$1" ]] ; then
     echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
@@ -230,15 +224,4 @@ bindkey "^N" history-beginning-search-forward-end
 
 unsetopt extended_glob
 
-##
-# rvm setting for Mountain Lion
-
-# put MacPorts-specific compiler flags in .rvmrc:
-# Make this work with OS X Lion... for now...
-# Export compile flags for MacPorts:
-if [ -d /opt/local/bin ] ; then
-  export CFLAGS="-O2 -arch x86_64"
-  export LDFLAGS="-L/opt/local/lib"
-  export CPPFLAGS="-I/opt/local/include"
-fi
 
