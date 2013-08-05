@@ -4,7 +4,8 @@
 ZSH_HOME=$HOME/.zsh.d
 ZDOTDIR=$ZSH_HOME
 
-source ~/.zsh.d/zshrc
+source $ZSH_HOME/zshrc
+
 
 # if [ -f ~/.zshrc ] ; then
 #     source ~/.zshrc

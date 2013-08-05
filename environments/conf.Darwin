@@ -1,0 +1,19 @@
+# vim: ft=zsh
+
+##
+# rvm setting for Mountain Lion
+
+if [ -s /usr/local/bin/gcc-4.2 ]; then
+  export CC=/usr/local/bin/gcc-4.2
+else
+  echo "... 'brew install apple-gcc42'"
+fi
+
+# put MacPorts-specific compiler flags in .rvmrc:
+# Make this work with OS X Lion... for now...
+# Export compile flags for MacPorts:
+if [ -d /opt/local/bin ] ; then
+  export CFLAGS="-O2 -arch x86_64"
+  export LDFLAGS="-L/opt/local/lib"
+  export CPPFLAGS="-I/opt/local/include"
+fi

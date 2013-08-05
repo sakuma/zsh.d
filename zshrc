@@ -48,6 +48,10 @@ source $ZSH_HOME/vcs_conf
 # utils
 source $ZSH_HOME/utils
 
+###
+# 環境依存設定
+source $ZSH_HOME/environments/conf.$(uname)
+
 
 autoload -U compinit
 compinit -u
@@ -227,15 +231,10 @@ bindkey "^N" history-beginning-search-forward-end
 unsetopt extended_glob
 
 ##
-# rvm setting for Lion
+# rvm setting for Mountain Lion
 
 # put MacPorts-specific compiler flags in .rvmrc:
 # Make this work with OS X Lion... for now...
-if [[ `uname` =~ "Darwin" ]] ; then
-  export CC=/usr/bin/gcc-4.2
-  #export CC=/usr/bin/i686-apple-darwin11-gcc-4.2.1
-fi
-
 # Export compile flags for MacPorts:
 if [ -d /opt/local/bin ] ; then
   export CFLAGS="-O2 -arch x86_64"
