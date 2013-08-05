@@ -100,7 +100,7 @@ if [ -f $ZSH_HOME/lib/auto-fu.zsh/auto-fu.zsh ]; then
     }
     zle -N zle-line-init
     zstyle ':completion:*' completer _oldlist _complete
-    zstyle ':auto-fu:var' postdisplay $''
+    # zstyle ':auto-fu:var' postdisplay $''
     # zstyle ':auto-fu:var' disable magic-space
     zstyle ':auto-fu:var' disable all
     zstyle ':auto-fu:highlight' completion
