@@ -44,7 +44,9 @@ source $ZSH_CUSTOM_LIB/utils.zsh
 
 ###
 # 環境依存設定
-source $ZSH_HOME/environments/conf.$(uname)
+if [ -f $ZSH_HOME/environments/conf.$(uname) ]; then
+  source $ZSH_HOME/environments/conf.$(uname)
+fi
 
 
 autoload -U compinit
