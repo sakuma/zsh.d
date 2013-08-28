@@ -36,11 +36,11 @@ source $ZSH_HOME/color
 
 ##
 # VSC (Git, SVN, ... more)
-source $ZSH_HOME/vcs_conf
+source $ZSH_CUSTOM_LIB/vcs_conf.zsh
 
 ##
 # utils
-source $ZSH_HOME/utils
+source $ZSH_CUSTOM_LIB/utils.zsh
 
 ###
 # 環境依存設定
