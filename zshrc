@@ -33,14 +33,10 @@ source $ZSH_HOME/aliases
 # 色関連
 source $ZSH_HOME/color
 
-
-##
-# VSC (Git, SVN, ... more)
-source $ZSH_CUSTOM_LIB/vcs_conf.zsh
-
-##
-# utils
-source $ZSH_CUSTOM_LIB/utils.zsh
+# load libs
+for library ($ZSH_CUSTOM_LIB/*.zsh); do
+  source $library
+done
 
 ###
 # 環境依存設定
