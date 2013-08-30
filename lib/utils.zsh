@@ -91,8 +91,8 @@ bindkey '^@' get_git_status
 fpath=($ZSH_HOME/completions $fpath)
 
 # auto-fu.zsh
-if [ -f $ZSH_HOME/lib/auto-fu.zsh/auto-fu.zsh ]; then
-    source $ZSH_HOME/lib/auto-fu.zsh/auto-fu.zsh
+if [ -f $ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh ]; then
+    source $ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh
     function zle-line-init () {
         auto-fu-init
     }
@@ -108,14 +108,14 @@ fi
 
 
 # zaw.zsh
-if [ -s $ZSH_HOME/lib/zaw/zaw.zsh ]; then
+if [ -s $ZSH_PLUGIN/zaw/zaw.zsh ]; then
   autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
   add-zsh-hook chpwd chpwd_recent_dirs
   zstyle ':chpwd:*' recent-dirs-max 5000
   zstyle ':chpwd:*' recent-dirs-default yes
   zstyle ':completion:*' recent-dirs-insert both
 
-  source $ZSH_HOME/lib/zaw/zaw.zsh
+  source $ZSH_PLUGIN/zaw/zaw.zsh
   zstyle ':filter-select' case-insensitive yes
   zstyle ':filter-select' rotate-list yes # enable rotation for filter-select
   # zstyle ':filter-select:highlight' matched fg=yellow,standout

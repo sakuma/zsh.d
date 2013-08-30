@@ -4,6 +4,7 @@
 ZSH_HOME=$HOME/.zsh.d
 ZDOTDIR=$ZSH_HOME
 ZSH_CUSTOM_LIB=$ZSH_HOME/lib
+ZSH_PLUGIN=$ZSH_HOME/plugin
 
 source $ZSH_HOME/paths
 source $ZSH_HOME/zshrc
