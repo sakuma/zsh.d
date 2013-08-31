@@ -32,7 +32,7 @@ _check_git_status() {
   local MODIFIED=''
   local UNTRACKED=''
   GIT_STATUS=$(git status -s)
-  MODIFIED=$( echo $GIT_STATUS | egrep "^\s?[MA]" | wc -l )
+  MODIFIED=$( echo $GIT_STATUS | egrep "^\s?[ADM]" | wc -l )
   UNTRACKED=$( echo $GIT_STATUS | egrep "^\?" | wc -l )
   if [ $MODIFIED -eq 0 ]; then
     BRANCH_COLOR=green
