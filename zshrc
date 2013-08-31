@@ -151,7 +151,7 @@ _update_prompt () {
         _vcs_info
         if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
             _check_git_status
-            RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+            RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[yellow]}%}$(git_remote_status)%{${fg[white]}%}]%{${reset_color}%}"
         else
             RPROMPT="%{${fg[white]}%}[%~%1(v|%F{cyan}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
         fi
