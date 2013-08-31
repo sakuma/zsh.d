@@ -26,57 +26,36 @@ _vcs_info(){
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
 }
 
-_check_exist_branch_on_remote() {
-    remote_branch_existed="false"
-
-    for remote_branch in $( git branch -r 2>/dev/null); do
-        if [[ -n $( echo $remote_branch | grep $current_branch ) ]]; then
-            remote_branch_existed="true"
-        fi
-    done
-}
-
 # ブランチの表示色の変更 : zsh 4.3.10 以上
 _check_git_status() {
-    GIT_STATUS=$( git status 2>/dev/null )
-    GIT_STATUS_LINE=$( echo $GIT_STATUS | wc -l)
+  local GIT_STATUS=''
+  local MODIFIED=''
+  local UNTRACKED=''
+  GIT_STATUS=$(git status -s)
+  MODIFIED=$( echo $GIT_STATUS | egrep "^\s?[MA]" | wc -l )
+  UNTRACKED=$( echo $GIT_STATUS | egrep "^\?" | wc -l )
+  if [ $MODIFIED -eq 0 ]; then
+    BRANCH_COLOR=green
+  else
     BRANCH_COLOR=red
-
-    pushed="false"
-    repository_error=$(git rev-parse HEAD 2>/dev/null)
-    if [[ $(echo $?) = "0" ]]; then 
-        current_branch=$( git branch --contains | awk '{print $2}' )
-        head=$(git rev-parse HEAD 2&>/dev/null)
-
-        for x in $(git rev-parse --remotes); do
-            if [[ $head == $x ]]; then
-                pushed="true"
-            fi
-        done
-
-        _check_exist_branch_on_remote
-    
-        if [[ $remote_branch_existed = "true" ]]; then
-            if [[ $pushed = "true" ]]; then
-                if [[ $GIT_STATUS_LINE = "2" ]]; then
-                    BRANCH_COLOR=green
-                else
-                    BRANCH_COLOR=red
-                fi
-            else
-                if [[ $GIT_STATUS_LINE = "4" ]]; then
-                    BRANCH_COLOR=yellow
-                else
-                    BRANCH_COLOR=red
-                fi
-            fi
-        else
-            if [[ $GIT_STATUS_LINE = "2" ]]; then
-                BRANCH_COLOR=cyan
-            else
-                BRANCH_COLOR=red
-            fi
-        fi
-    fi
+  fi
+  if [ $MODIFIED -eq 0 ] && [ $UNTRACKED -gt 0 ]; then
+    BRANCH_COLOR=yellow
+  fi
 }
 
+git_remote_status() {
+  remote=${$(command git rev-parse --verify ${hook_com[branch]}@{upstream} --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
+  if [[ -n ${remote} ]] ; then
+    ahead=$(command git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+    behind=$(command git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+
+    if [ $ahead -eq 0 ] && [ $behind -gt 0 ]; then
+      echo "<->"
+    elif [ $ahead -gt 0 ] && [ $behind -eq 0 ]; then
+      echo "<+>"
+    elif [ $ahead -gt 0 ] && [ $behind -gt 0 ]; then
+      echo "<*>"
+    fi
+  fi
+}
