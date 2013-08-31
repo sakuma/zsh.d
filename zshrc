@@ -33,14 +33,10 @@ source $ZSH_HOME/aliases
 # 色関連
 source $ZSH_HOME/color
 
-
-##
-# VSC (Git, SVN, ... more)
-source $ZSH_CUSTOM_LIB/vcs_conf.zsh
-
-##
-# utils
-source $ZSH_CUSTOM_LIB/utils.zsh
+# load libs
+for library ($ZSH_CUSTOM_LIB/*.zsh); do
+  source $library
+done
 
 ###
 # 環境依存設定
@@ -155,7 +151,7 @@ _update_prompt () {
         _vcs_info
         if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
             _check_git_status
-            RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
+            RPROMPT="%{${fg[white]}%}[%~%1(v|%F{$BRANCH_COLOR}%1v%f|)%{${fg[yellow]}%}$(git_remote_status)%{${fg[white]}%}]%{${reset_color}%}"
         else
             RPROMPT="%{${fg[white]}%}[%~%1(v|%F{cyan}%1v%f|)%{${fg[white]}%}]%{${reset_color}%}"
         fi
