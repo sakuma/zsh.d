@@ -51,9 +51,9 @@ git_remote_status() {
     behind=$(command git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
 
     if [ $ahead -eq 0 ] && [ $behind -gt 0 ]; then
-      echo "<->"
+      echo "<-$behind>"
     elif [ $ahead -gt 0 ] && [ $behind -eq 0 ]; then
-      echo "<+>"
+      echo "<+$ahead>"
     elif [ $ahead -gt 0 ] && [ $behind -gt 0 ]; then
       echo "<*>"
     fi
