@@ -44,6 +44,13 @@ if [ -f $ZSH_HOME/environments/conf.$(uname) ]; then
   source $ZSH_HOME/environments/conf.$(uname)
 fi
 
+###
+# rvm completion
+if [ -f $HOME/.rvm/scripts/extras/completion.zsh/_rvm ]; then
+  fpath=($HOME/.rvm/scripts/extras/completion.zsh $fpath)
+fi
+
+export fpath
 
 autoload -U compinit
 compinit -u
