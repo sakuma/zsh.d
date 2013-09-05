@@ -7,11 +7,14 @@ if [ -f $auto_fu_file_path ]; then
   ######
   ## for generate
   ## A=$auto_fu_file_path; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh.d")
-  ##
   ##-------
-  ## auto-fu.zsh stuff.
-  ## source ~/.zsh.d/plugin/auto-fu.zsh/auto-fu.zsh
-  { . ~/.zsh.d/auto-fu; auto-fu-install; }
+  if [ -f $ZSH_HOME/auto-fu ]; then
+    { . $ZSH_HOME/auto-fu; auto-fu-install; }
+  else
+    (zsh -c "source $auto_fu_file_path ; auto-fu-zcompile $auto_fu_file_path $ZSH_HOME")
+    { . $ZSH_HOME/auto-fu; auto-fu-install; }
+  fi
+
   zstyle ':auto-fu:highlight' input bold
   zstyle ':auto-fu:highlight' completion fg=black,bold
   zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
