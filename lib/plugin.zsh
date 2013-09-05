@@ -1,17 +1,24 @@
 ############
 # auto-fu.zsh
 #
-if [ -f $ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh ]; then
-    source $ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-    # zstyle ':auto-fu:var' postdisplay $''
-    # zstyle ':auto-fu:var' disable magic-space
-    zstyle ':auto-fu:var' disable all
-    zstyle ':auto-fu:highlight' completion
+
+auto_fu_file_path=$ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh
+if [ -f $auto_fu_file_path ]; then
+  ######
+  ## for generate
+  ## A=$auto_fu_file_path; (zsh -c "source $A ; auto-fu-zcompile $A ~/.zsh.d")
+  ##
+  ##-------
+  ## auto-fu.zsh stuff.
+  ## source ~/.zsh.d/plugin/auto-fu.zsh/auto-fu.zsh
+  { . ~/.zsh.d/auto-fu; auto-fu-install; }
+  zstyle ':auto-fu:highlight' input bold
+  zstyle ':auto-fu:highlight' completion fg=black,bold
+  zstyle ':auto-fu:highlight' completion/one fg=white,bold,underline
+  zstyle ':auto-fu:var' postdisplay $'\n-azfu-'
+  zstyle ':auto-fu:var' track-keymap-skip opp
+  zle-line-init () {auto-fu-init;}; zle -N zle-line-init
+  zle -N zle-keymap-select auto-fu-zle-keymap-select
 else
   echo "Not found 'auto-fu', -> 'git submodule init; git submodule update'"
 fi
