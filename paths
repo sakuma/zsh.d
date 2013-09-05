@@ -19,6 +19,14 @@
 ## 重複パスを登録しない
 typeset -U path cdpath fpath manpath
 
+
+##
+# コード補完
+
+# 拡張用の補完パス
+fpath=($ZSH_HOME/completions $fpath)
+
+
 ## sudo用のpathを設定
 typeset -xT SUDO_PATH sudo_path
 typeset -U sudo_path
