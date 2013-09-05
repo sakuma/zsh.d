@@ -28,9 +28,11 @@ fpath=($ZSH_HOME/completions $fpath)
 
 
 ## sudo用のpathを設定
-typeset -xT SUDO_PATH sudo_path
-typeset -U sudo_path
-sudo_path=({/usr/local,/usr,}/sbin(N-/))
+if [ "$(uname)" = 'Darwin' ]; then
+  typeset -xT SUDO_PATH sudo_path
+  typeset -U sudo_path
+  sudo_path=({/usr/local,/usr,}/sbin(N-/))
+fi
 
 ## pathを設定
 path=(~/bin(N-/) /usr/local/bin(N-/) ${path})
