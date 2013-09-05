@@ -1,0 +1,11 @@
+# vim: ft=zsh
+
+###
+# git-flow用 補完
+
+git_flow_completion_file=$ZSH_HOME/plugin/env/Linux/git-flow-completion/git-flow-completion.zsh
+if [ -f $git_flow_completion_file ]; then
+  source $git_flow_completion_file
+else
+  echo "Not found git-flow-completion for linux, -> git submodule ..."
+fi

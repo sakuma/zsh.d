@@ -84,12 +84,6 @@ zle -N get_git_status
 bindkey '^@' get_git_status
 
 
-##
-# コード補完
-
-# 拡張用の補完パス
-fpath=($ZSH_HOME/completions $fpath)
-
 # auto-fu.zsh
 if [ -f $ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh ]; then
     source $ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh
