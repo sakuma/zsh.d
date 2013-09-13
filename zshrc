@@ -4,7 +4,12 @@
 ##
 # VIEW MODE
 
-source $ZSH_HOME/config
+if [ -f $ZSH_HOME/conf/switch_view.zsh ]; then
+  source $ZSH_HOME/conf/switch_view.zsh
+else
+  echo "Not found: $ZSH_HOME/conf/switch_view.zsh"
+  exit 1
+fi
 
 function cd_gem_dir {
   if [[ -z "$1" ]] ; then

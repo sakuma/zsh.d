@@ -1,5 +1,5 @@
 history*
-config
+conf/switch_view.zsh
 
 # dotfiles
 .zcompdump
