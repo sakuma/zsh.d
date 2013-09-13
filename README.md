@@ -23,7 +23,7 @@ git clone git://github.com/n-sakuma/zsh.d.git ~/.zsh.d
 
 ln -s ~/.zsh.d/dot.zprofile ~/.zprofile
 
-cp ~/.zsh.d/config{.sample,}
+cp ~/.zsh.d/env/switch_view.zsh{.sample,}
 ```
 
 Enjoy!
