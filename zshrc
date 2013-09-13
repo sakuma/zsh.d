@@ -31,12 +31,12 @@ fi
 
 ###
 # Alias
-source $ZSH_HOME/aliases
+source $ZSH_HOME/conf/aliases.zsh
 
 
 ###
 # 色関連
-source $ZSH_HOME/color
+source $ZSH_HOME/conf/color.zsh
 
 # load libs
 for library ($ZSH_CUSTOM_LIB/*.zsh); do
