@@ -217,6 +217,9 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 
+# Ctrl - s の端末ロックを無効にする
+stty stop undef
+
 ## Emacs Like keybind
 # bindkey -e
 
