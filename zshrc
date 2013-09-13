@@ -45,8 +45,8 @@ done
 
 ###
 # 環境依存設定
-if [ -f $ZSH_HOME/environments/conf.$(uname) ]; then
-  source $ZSH_HOME/environments/conf.$(uname)
+if [ -f $ZSH_HOME/conf/env/$(uname).conf ]; then
+  source $ZSH_HOME/conf/env/$(uname).conf
 fi
 
 ###

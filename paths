@@ -54,8 +54,8 @@ if [ -x $HOME/bin ]; then
 fi
 
 # Each env path
-if [ -f $ZSH_HOME/environments/path.$(uname) ]; then
-  source $ZSH_HOME/environments/path.$(uname)
+if [ -f $ZSH_HOME/conf/env/$(uname).path ]; then
+  source $ZSH_HOME/conf/env/$(uname).path
 fi
 
 
