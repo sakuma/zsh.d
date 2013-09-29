@@ -17,14 +17,24 @@ if [[ -d /opt/local ]]; then
     export MANPATH=/opt/local/share/man:$MANPATH
 fi
 
-##
-# coreutils
+
+##############
 #
-# for Macports
-# if [[ -d /opt/local/libexec/gnubin ]]; then
-#     export PATH=/opt/local/libexec/gnubin:$PATH
-# fi
-# for homebrew
+# Homebrew
+
+
+# coreutils
 if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
     PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 fi
+
+# scala
+function set_scala_path() {
+  if [ -x $(which scala) ]; then
+    local scala_version=2.10.2
+    export SCALA_HOME=/usr/local/Cellar/scala/$scala_version
+    export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+    PATH=$PATH:$SCALA_HOME/bin
+  fi
+}
+set_scala_path
