@@ -39,6 +39,7 @@ alias -g T='| tail'
 alias ru='rvm use'
 
 # git
+alias g='git'
 alias gis='git status'
 alias gil='git log'
 alias gill='git pull'
