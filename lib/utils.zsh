@@ -82,3 +82,18 @@ function get_git_status() {
 zle -N get_git_status
 # Ctrl+Space
 bindkey '^@' get_git_status
+
+HARDCOPYFILE=/tmp/tmux-hardcopy
+touch $HARDCOPYFILE
+
+dabbrev-complete () {
+  local reply lines=80
+  tmux capture-pane && tmux save-buffer -b 0 $HARDCOPYFILE && tmux delete-buffer -b 0
+  reply=($(sed '/^$/d' $HARDCOPYFILE | sed '$ d' | tail -$lines))
+
+  compadd -Q - "${reply[@]%[*/=@|]}"
+}
+
+zle -C dabbrev-complete menu-complete dabbrev-complete
+bindkey '^o' dabbrev-complete
+bindkey '^o^_' reverse-menu-complete
