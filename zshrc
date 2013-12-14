@@ -28,6 +28,10 @@ else
     export EDITOR=vi
 fi
 
+# \e で SQLをvim編集できる
+if [[ -x $( which vim ) ]]; then
+  export PSQL_EDITOR='vim +"set syntax=sql" '
+fi
 
 ###
 # Alias
