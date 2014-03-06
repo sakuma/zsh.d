@@ -197,7 +197,8 @@ chpwd() {
 
 ## Command history configuration
 #
-HISTFILE=$ZSH_HOME/history
+# HISTFILE=$ZSH_HOME/history
+HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 # export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S  '
