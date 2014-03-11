@@ -25,7 +25,7 @@ fi
 
 # coreutils
 if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
-    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+    export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 fi
 
 # scala
@@ -34,7 +34,19 @@ function set_scala_path() {
     local scala_version=2.10.2
     export SCALA_HOME=/usr/local/Cellar/scala/$scala_version
     export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
-    PATH=$PATH:$SCALA_HOME/bin
+    export PATH=$PATH:$SCALA_HOME/bin
   fi
 }
 set_scala_path
+
+# golang
+function set_go_path() {
+  if [ -x $(which go) ]; then
+    local go_version=1.2.1
+    local installed_path=/usr/local/Cellar/go/$go_version/libexec
+    export PATH=$installed_path/bin:$PATH
+    export GOROOT=$installed_path
+    export GOPATH=$HOME/go
+  fi
+}
+set_go_path
