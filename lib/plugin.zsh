@@ -52,5 +52,8 @@ else
   echo "Not found 'zaw', -> 'git submodule init; git submodule update'"
 fi
 
-
-
+#######
+# notify
+if [ -s $ZSH_PLUGIN/zsh-notify/notify.plugin.zsh ]; then
+  source $ZSH_PLUGIN/zsh-notify/notify.plugin.zsh
+fi

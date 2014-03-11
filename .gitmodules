@@ -10,3 +10,6 @@
 [submodule "plugin/env/Linux/git-flow-completion"]
 	path = plugin/env/Linux/git-flow-completion
 	url = git@github.com:bobthecow/git-flow-completion.git
+[submodule "plugin/zsh-notify"]
+	path = plugin/zsh-notify
+	url = git@github.com:marzocchi/zsh-notify.git
