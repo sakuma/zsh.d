@@ -1,7 +1,6 @@
 ############
 # auto-fu.zsh
 #
-
 auto_fu_file_path=$ZSH_PLUGIN/auto-fu.zsh/auto-fu.zsh
 if [ -f $auto_fu_file_path ]; then
   ######
@@ -52,8 +51,18 @@ else
   echo "Not found 'zaw', -> 'git submodule init; git submodule update'"
 fi
 
-#######
+
+############
 # notify
+#
 if [ -s $ZSH_PLUGIN/zsh-notify/notify.plugin.zsh ]; then
   source $ZSH_PLUGIN/zsh-notify/notify.plugin.zsh
+fi
+
+
+############
+# zsh syntax
+#
+if [ -s $ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source $ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
