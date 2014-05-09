@@ -146,8 +146,8 @@ fi
 #     PATH=$PATH:/usr/local/share/python
 # fi
 
-if [[ -d /usr/local/lib/python2.7/site-packages ]]; then
-    export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-fi
+# if [[ -d /usr/local/lib/python3.4/site-packages ]]; then
+#     export PYTHONPATH=/usr/local/lib/python3.4/site-packages:$PYTHONPATH
+# fi
 
 export PATH
