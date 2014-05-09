@@ -53,14 +53,23 @@ function ls_abbrev() {
     local ls_lines=$(echo "$ls_result" | wc -l | tr -d ' ')
 
     if [ $ls_lines -gt 10 ]; then
+        echo
         echo "$ls_result" | head -n 5
-        echo '...'
+        echo "\n...\n"
         echo "$ls_result" | tail -n 5
+        echo -n "\n... "
         echo "$(command ls -1 -A | wc -l | tr -d ' ') files exist"
     else
+        echo "\n"
         echo "$ls_result"
+        echo
     fi
+    zle reset-prompt
+    return 0
 }
+zle -N ls_abbrev
+bindkey '^l' ls_abbrev
+
 
 function get_git_status() {
     if [ -n "$BUFFER" ]; then
