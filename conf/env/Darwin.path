@@ -42,11 +42,9 @@ set_scala_path
 # golang
 function set_go_path() {
   if [ -x $(which go) ]; then
-    local go_version=1.2.1
-    local installed_path=/usr/local/Cellar/go/$go_version/libexec
-    export PATH=$installed_path/bin:$PATH
-    export GOROOT=$installed_path
     export GOPATH=$HOME/go
+    export PATH=$PATH:/usr/local/opt/go/libexec/bin
+    eval `go env | grep GOROOT`
   fi
 }
 set_go_path
