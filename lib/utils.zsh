@@ -106,3 +106,14 @@ dabbrev-complete () {
 zle -C dabbrev-complete menu-complete dabbrev-complete
 bindkey '^o' dabbrev-complete
 bindkey '^o^_' reverse-menu-complete
+
+function peco-src () {
+  local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
