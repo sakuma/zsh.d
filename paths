@@ -101,7 +101,7 @@ if [[ $MY_RUBY_MANAGEMENT_TOOL = 'rbenv' ]]; then
   export PATH=$HOME/.rbenv/bin:$PATH
   export PATH=$HOME/.rbenv/shims:$PATH
 
-  source $RBENV_ROOT/completions/rbenv.zsh
+  # source $RBENV_ROOT/completions/rbenv.zsh
   source $ZSH_HOME/conf/rbenv.zsh
 
 else # RVM
