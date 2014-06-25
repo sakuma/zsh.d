@@ -40,6 +40,7 @@ rbenv plugin install rkh:rbenv-update
 rbenv plugin install rkh:rbenv-whatis
 rbenv plugin install rkh:rbenv-use
 rbenv plugin install sstephenson:rbenv-gem-rehash
+rbenv plugin install amatsuda:gem-src
 rbenv plugin install sstephenson:rbenv-default-gems
 set_default_gems
 rbenv plugin install tpope:rbenv-aliases
