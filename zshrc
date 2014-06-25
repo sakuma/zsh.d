@@ -152,14 +152,18 @@ esac
 _update_prompt () {
 
     # PROMPT 設定
-    RUBY_VER=$(rvm-prompt 2&>/dev/null)
+    if [[ $MY_RUBY_MANAGEMENT_TOOL = 'rbenv' ]]; then
+      RUBY_MANAGEMENT_VER="ruby-$(rbenv version | awk '{print $1}' 2&>/dev/null)"
+    else
+      RUBY_MANAGEMENT_VER=$(rvm-prompt 2&>/dev/null)
+    fi
     if [[ $PROMPT_VIEW_MODE = 'client' ]]; then
-        PROMPT="%{${fg[green]}%}$RUBY_VER$ %{${reset_color}%}"
+        PROMPT="%{${fg[green]}%}$RUBY_MANAGEMENT_VER$ %{${reset_color}%}"
     elif [[ $PROMPT_VIEW_MODE = 'server' ]]; then
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     else # 未設定の場合
         echo "not setting config"
-        PROMPT="%{${fg[green]}%}$RUBY_VER$ %{${reset_color}%}"
+        PROMPT="%{${fg[green]}%}$RUBY_MANAGEMENT_VER$ %{${reset_color}%}"
     fi
 
     # RPROMPT 設定

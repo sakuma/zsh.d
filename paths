@@ -88,16 +88,27 @@ fi
 ##
 # Ruby
 
-##  rvm (Ruby Version Manager)
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/extras/rails" ]] && . "$HOME/.rvm/scripts/extras/rails"
+##
+# switch rbenv or rvm
+export MY_RUBY_MANAGEMENT_TOOL='rbenv'  # or rvm
 
-# RVM_PATHS=( "$HOME/.rvm/bin" "$HOME/.rvm/usr/bin" )
-# for RVM_PATH in ${RVM_PATHS[*]}; do
-#     if [[ -d $RVM_PATH ]]; then
-#         export PATH=$RVM_PATH:$PATH
-#     fi
-# done
+if [[ $MY_RUBY_MANAGEMENT_TOOL = 'rbenv' ]]; then
+  # To use Homebrew's directories rather than ~/.rbenv add to your profile:
+  # export RBENV_ROOT=/usr/local/var/rbenv
+  export RBENV_ROOT=$HOME/.rbenv
+
+  # eval "$(rbenv init -)" zshの挙動がおかしくなるから自分で設定する
+  export PATH=$HOME/.rbenv/bin:$PATH
+  export PATH=$HOME/.rbenv/shims:$PATH
+
+  source $RBENV_ROOT/completions/rbenv.zsh
+  source $ZSH_HOME/conf/rbenv.zsh
+
+else # RVM
+  ##  rvm (Ruby Version Manager)
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+  [[ -s "$HOME/.rvm/scripts/extras/rails" ]] && . "$HOME/.rvm/scripts/extras/rails"
+fi
 
 # Gems
 ### require 'rubygems' を省略できる
