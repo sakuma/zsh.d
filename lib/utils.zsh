@@ -107,7 +107,18 @@ zle -C dabbrev-complete menu-complete dabbrev-complete
 bindkey '^o' dabbrev-complete
 bindkey '^o^_' reverse-menu-complete
 
+function check_ghq () {
+  if which ghq > /dev/null; then
+    return 0
+  else
+    echo "Not found 'ghq'\n"
+    echo "\ninstalling...\n"
+    go get github.com/motemen/ghq
+  fi
+}
+
 function peco-src () {
+  check_ghq
   local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
   if [ -n "$selected_dir" ]; then
     BUFFER="cd ${selected_dir}"
