@@ -24,6 +24,15 @@ export RBENV_PLUGIN_ROOT="${RBENV_ROOT}/plugins/rbenv-path"
 # plugin manager
 install_rbenv_plugin_manager 'rbenv-plugin' 'https://github.com/taqtiqa/rbenv-plugin.git'
 
+# bin_path="$(abs_dirname "$0")"
+for plugin_bin in "${RBENV_ROOT}/plugins/"*/bin; do
+  bin_path="${bin_path}:${plugin_bin}"
+done
+export PATH="${bin_path}:${PATH}"
+
+# Homebrew's 'findutils'
+ln -fs /usr/local/bin/gfind /usr/local/bin/find
+
 # by rbenv-plugin
 rbenv plugin install sstephenson:rbenv-vars
 rbenv plugin install chriseppstein:rbenv-each
