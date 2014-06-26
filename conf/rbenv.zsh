@@ -28,10 +28,6 @@ function install_rbenv_plugin_manager() {
   fi
 }
 
-function set_default_gems() {
-  cp -f $ZSH_HOME/misc/rbenv-default-gems $RBENV_ROOT/default-gems
-}
-
 install_rbenv
 if [ ! -d $RBENV_ROOT/plugins ]; then mkdir $RBENV_ROOT/plugins; fi
 
@@ -52,8 +48,6 @@ rbenv plugin install rkh:rbenv-update
 rbenv plugin install rkh:rbenv-whatis
 rbenv plugin install sstephenson:rbenv-gem-rehash
 rbenv plugin install amatsuda:gem-src
-rbenv plugin install sstephenson:rbenv-default-gems
-set_default_gems
 rbenv plugin install tpope:rbenv-aliases
 rbenv plugin install tpope:rbenv-ctags
 rbenv plugin install tpope:rbenv-communal-gems
