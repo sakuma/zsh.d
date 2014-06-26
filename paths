@@ -98,6 +98,7 @@ if [[ $MY_RUBY_MANAGEMENT_TOOL = 'rbenv' ]]; then
   export RBENV_ROOT=$HOME/.rbenv
 
   # eval "$(rbenv init -)" zshの挙動がおかしくなるから自分で設定する
+  export RBENV_SHELL=zsh
   export PATH=$HOME/.rbenv/bin:$PATH
   export PATH=$HOME/.rbenv/shims:$PATH
 

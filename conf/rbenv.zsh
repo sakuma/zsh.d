@@ -1,3 +1,19 @@
+# from `rbenv init -`
+rbenv() {
+  local command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  rehash|shell|update)
+    eval "`rbenv "sh-$command" "$@"`";;
+  *)
+    command rbenv "$command" "$@";;
+  esac
+}
+
 function install_rbenv() {
   if [ ! -d $RBENV_ROOT ]; then
     git clone https://github.com/sstephenson/rbenv.git $HOME/.rbenv
@@ -24,21 +40,16 @@ export RBENV_PLUGIN_ROOT="${RBENV_ROOT}/plugins/rbenv-path"
 # plugin manager
 install_rbenv_plugin_manager 'rbenv-plugin' 'https://github.com/taqtiqa/rbenv-plugin.git'
 
-# bin_path="$(abs_dirname "$0")"
-for plugin_bin in "${RBENV_ROOT}/plugins/"*/bin; do
-  bin_path="${bin_path}:${plugin_bin}"
-done
-export PATH="${bin_path}:${PATH}"
-
 # Homebrew's 'findutils'
-ln -fs /usr/local/bin/gfind /usr/local/bin/find
+if ! which gfind >/dev/null 2>&1; then
+  ln -fs /usr/local/bin/gfind /usr/local/bin/find
+fi
 
 # by rbenv-plugin
 rbenv plugin install sstephenson:rbenv-vars
 rbenv plugin install chriseppstein:rbenv-each
 rbenv plugin install rkh:rbenv-update
 rbenv plugin install rkh:rbenv-whatis
-rbenv plugin install rkh:rbenv-use
 rbenv plugin install sstephenson:rbenv-gem-rehash
 rbenv plugin install amatsuda:gem-src
 rbenv plugin install sstephenson:rbenv-default-gems
