@@ -151,15 +151,13 @@ fi
 
 
 ##
-# Python
-
-# for Homebrew
-# if [[ -d /usr/local/share/python ]]; then
-#     PATH=$PATH:/usr/local/share/python
-# fi
-
-# if [[ -d /usr/local/lib/python3.4/site-packages ]]; then
-#     export PYTHONPATH=/usr/local/lib/python3.4/site-packages:$PYTHONPATH
-# fi
+# Python (pyenv)
+#
+export PYENV_ROOT="${HOME}/.pyenv"
+if [[ ! -d "${PYENV_ROOT}" ]]; then
+  git clone https://github.com/yyuu/pyenv.git $PYENV_ROOT
+fi
+PATH=${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}
+export PYENV_SHELL=zsh
 
 export PATH
