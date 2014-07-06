@@ -1,6 +1,16 @@
-# plugin - virtualenv
+# plugins
+
+# virtualenv
 if [[ ! -d "${PYENV_ROOT}/plugins/pyenv-virtualenv" ]]; then
   git clone https://github.com/yyuu/pyenv-virtualenv.git $PYENV_ROOT/plugins/pyenv-virtualenv
+fi
+# update
+if [[ ! -d "${PYENV_ROOT}/plugins/pyenv-update" ]]; then
+  git clone https://github.com/yyuu/pyenv-update.git $PYENV_ROOT/plugins/pyenv-update
+fi
+# pip-rehash
+if [[ ! -d "${PYENV_ROOT}/plugins/pyenv-pip-rehash " ]]; then
+  git clone https://github.com/yyuu/pyenv-pip-rehash.git $PYENV_ROOT/plugins/pyenv-pip-rehash
 fi
 
 # from `pyenv init -`

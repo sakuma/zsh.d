@@ -159,5 +159,6 @@ if [[ ! -d "${PYENV_ROOT}" ]]; then
 fi
 PATH=${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}
 export PYENV_SHELL=zsh
+source $ZSH_HOME/conf/pyenv.zsh
 
 export PATH
