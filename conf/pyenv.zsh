@@ -9,7 +9,7 @@ if [[ ! -d "${PYENV_ROOT}/plugins/pyenv-update" ]]; then
   git clone https://github.com/yyuu/pyenv-update.git $PYENV_ROOT/plugins/pyenv-update
 fi
 # pip-rehash
-if [[ ! -d "${PYENV_ROOT}/plugins/pyenv-pip-rehash " ]]; then
+if [[ ! -d "${PYENV_ROOT}/plugins/pyenv-pip-rehash" ]]; then
   git clone https://github.com/yyuu/pyenv-pip-rehash.git $PYENV_ROOT/plugins/pyenv-pip-rehash
 fi
 
