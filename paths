@@ -161,4 +161,16 @@ PATH=${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}
 export PYENV_SHELL=zsh
 source $ZSH_HOME/conf/pyenv.zsh
 
+##
+# GAE
+gae_sdk_path=$HOME/google-cloud-sdk
+if [[ ! -d $gae_sdk_path ]]; then
+  echo "Not install GAE SDK"
+  echo "curl https://sdk.cloud.google.com | bash"
+fi
+
+if [[ -d $gae_sdk_path ]]; then
+  source $gae_sdk_path/path.zsh.inc
+fi
+
 export PATH
