@@ -46,6 +46,9 @@ alias gill='git pull'
 alias gish='git push'
 alias gic='git commit'
 alias gicl='git clone'
+alias gif='git fetch --prune'
+alias gic='git checkout'
+alias gicb='git checkout -b'
 
 which hub > /dev/null
 if [ $? = 0 ]; then
