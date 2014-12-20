@@ -119,7 +119,8 @@ function check_ghq () {
 
 function peco-src () {
   check_ghq
-  local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
+  # local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER") # 絶対パス
+  local selected_dir=$(ghq list | sed -e "s/^/~\/work\/src\//" | peco --query "$LBUFFER") #相対パス
   if [ -n "$selected_dir" ]; then
     BUFFER="cd ${selected_dir}"
     zle accept-line
