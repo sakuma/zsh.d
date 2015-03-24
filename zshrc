@@ -148,22 +148,31 @@ case ${UID} in
   ;;
 esac
 
+function _using_lang_env()
+{
+  if [[ -f .ruby-version ]]; then
+    MY_IMPLEMENT_MANAGEMENT_TOOL='rbenv'
+  elif [[ -f .python-version ]]; then
+    MY_IMPLEMENT_MANAGEMENT_TOOL='pyenv'
+  fi
+}
 
 _update_prompt () {
-
+    _using_lang_env
     # PROMPT 設定
-    if [[ $MY_RUBY_MANAGEMENT_TOOL = 'rbenv' ]]; then
-      RUBY_MANAGEMENT_VER="ruby-$(rbenv version | awk '{print $1}' 2&>/dev/null)"
-    else
-      RUBY_MANAGEMENT_VER=$(rvm-prompt 2&>/dev/null)
+    if [[ $MY_IMPLEMENT_MANAGEMENT_TOOL = 'rbenv' ]]; then
+      MY_IMPLEMENT_MANAGEMENT_TOOL="ruby-$(rbenv version | awk '{print $1}' 2&>/dev/null)"
+    elif [[ $MY_IMPLEMENT_MANAGEMENT_TOOL = 'pyenv' ]]; then
+
+      MY_IMPLEMENT_MANAGEMENT_TOOL="$(python --version 2&>/dev/null)@$(pyenv version-name)"
     fi
     if [[ $PROMPT_VIEW_MODE = 'client' ]]; then
-        PROMPT="%{${fg[green]}%}$RUBY_MANAGEMENT_VER$ %{${reset_color}%}"
+        PROMPT="%{${fg[green]}%}$MY_IMPLEMENT_MANAGEMENT_TOOL$ %{${reset_color}%}"
     elif [[ $PROMPT_VIEW_MODE = 'server' ]]; then
         PROMPT="%{${fg[cyan]}%}%n@%{${fg[white]}%}%m%{${fg[cyan]}%} $ %{${reset_color}%}"
     else # 未設定の場合
         echo "not setting config"
-        PROMPT="%{${fg[green]}%}$RUBY_MANAGEMENT_VER$ %{${reset_color}%}"
+        PROMPT="%{${fg[green]}%}$MY_IMPLEMENT_MANAGEMENT_TOOL$ %{${reset_color}%}"
     fi
 
     # RPROMPT 設定
