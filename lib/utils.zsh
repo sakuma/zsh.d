@@ -129,3 +129,15 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey '^]' peco-src
+
+function s() {
+  ssh $(awk '
+    tolower($1)=="host" {
+      for (i=2; i<=NF; i++) {
+        if ($i !~ "[*?]") {
+          print $i
+        }
+      }
+    }
+  ' ~/.ssh/config | sort | peco)
+}
