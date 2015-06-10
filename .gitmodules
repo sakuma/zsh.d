@@ -1,9 +1,6 @@
 [submodule "plugin/git-svn"]
   path = plugin/git-svn
   url = git@github.com:andrep/git-svn-clone-externals.git
-[submodule "plugin/auto-fu.zsh"]
-  path = plugin/auto-fu.zsh
-  url = git@github.com:hchbaw/auto-fu.zsh.git
 [submodule "plugin/zaw"]
   path = plugin/zaw
   url = git@github.com:zsh-users/zaw.git
