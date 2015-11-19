@@ -163,14 +163,17 @@ source $ZSH_HOME/conf/pyenv.zsh
 
 ##
 # GAE
-gae_sdk_path=$HOME/google-cloud-sdk
-if [[ ! -d $gae_sdk_path ]]; then
-  echo "Not install GAE SDK"
-  echo "curl https://sdk.cloud.google.com | bash"
-fi
+gae_sdk_enabled=false
+if [[ $gae_sdk_enabled = true ]]; then
+  gae_sdk_path=$HOME/google-cloud-sdk
+  if [[ ! -d $gae_sdk_path ]]; then
+    echo "Not install GAE SDK"
+    echo "curl https://sdk.cloud.google.com | bash"
+  fi
 
-if [[ -d $gae_sdk_path ]]; then
-  source $gae_sdk_path/path.zsh.inc
+  if [[ -d $gae_sdk_path ]]; then
+    source $gae_sdk_path/path.zsh.inc
+  fi
 fi
 
 export PATH
