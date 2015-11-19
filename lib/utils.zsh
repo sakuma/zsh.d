@@ -68,7 +68,7 @@ function ls_abbrev() {
     return 0
 }
 zle -N ls_abbrev
-bindkey '^l' ls_abbrev
+# bindkey '^l' ls_abbrev
 
 
 function get_git_status() {
