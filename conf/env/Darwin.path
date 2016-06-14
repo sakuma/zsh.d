@@ -42,14 +42,10 @@ function set_scala_path() {
 # golang
 function set_go_path() {
   if [ -x $(which go) ]; then
-    export GOPATH=$HOME/work
+    export GOPATH=$HOME/work/golang
     export PATH=$PATH:$GOPATH/bin
     export PATH=$PATH:/usr/local/opt/go/libexec/bin
     # eval `go env | grep GOROOT`
   fi
 }
 set_go_path
-
-export DOCKER_CERT_PATH=/Users/sakuma/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-export DOCKER_HOST=tcp://192.168.59.103:2376

@@ -38,3 +38,10 @@ fi
 if [ -s $ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source $ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+############
+# direnv
+#
+if which direnv > /dev/null; then
+   eval "$(direnv hook zsh)"
+fi
