@@ -117,7 +117,7 @@ function check_ghq () {
   fi
 }
 
-function peco-src () {
+function peco-src() {
   check_ghq
   # local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER") # 絶対パス
   local selected_dir=$(ghq list | sed -e "s/^/~\/work\/src\//" | peco --query "$LBUFFER") #相対パス
