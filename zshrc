@@ -43,9 +43,10 @@ source $ZSH_HOME/conf/aliases.zsh
 source $ZSH_HOME/conf/color.zsh
 
 # load libs
-for library ($ZSH_CUSTOM_LIB/*.zsh); do
-  source $library
-done
+# for library ($ZSH_CUSTOM_LIB/*.zsh); do
+#   source $library
+# done
+source $ZSH_HOME/plugin.zsh
 
 ###
 # 環境依存設定
@@ -246,6 +247,9 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
+
+source $ZSH_HOME/lib/vcs_conf.zsh
+source $ZSH_HOME/lib/utils.zsh
 
 unsetopt extended_glob
 
