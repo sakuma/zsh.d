@@ -53,12 +53,6 @@ if [ -f $ZSH_HOME/conf/env/$(uname).conf ]; then
   source $ZSH_HOME/conf/env/$(uname).conf
 fi
 
-###
-# rvm completion
-if [ -f $HOME/.rvm/scripts/extras/completion.zsh/_rvm ]; then
-  fpath=($HOME/.rvm/scripts/extras/completion.zsh $fpath)
-fi
-
 export fpath
 
 autoload -U compinit
