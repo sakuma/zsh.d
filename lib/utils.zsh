@@ -166,3 +166,11 @@ zle -N peco-git-branch-checkout
 
 # NOTE: replace zaw-git-branches
 # bindkey '^g' peco-git-branch-checkout
+
+## img tools
+if ! which imgcat > /dev/null; then
+  go get -u github.com/olivere/iterm2-imagetools/cmd/imgcat
+fi
+if ! which imgls > /dev/null; then
+  go get -u github.com/olivere/iterm2-imagetools/cmd/imgls
+fi
