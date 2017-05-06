@@ -250,6 +250,7 @@ bindkey "^N" history-beginning-search-forward-end
 
 source $ZSH_HOME/lib/vcs_conf.zsh
 source $ZSH_HOME/lib/utils.zsh
+source $ZSH_HOME/plugin.zsh
 
 unsetopt extended_glob
 
