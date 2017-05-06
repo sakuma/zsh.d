@@ -39,7 +39,7 @@ if ! zplug check --verbose; then
   fi
 fi
 
-zplug load
+# zplug load
 
 ############
 # zaw.zsh
@@ -61,6 +61,12 @@ zstyle ':filter-select' extended-search yes # see below
 bindkey '^X' zaw-cdr # Ctrl - x
 bindkey '^R' zaw-history
 bindkey '^O' zaw-open-file
+bindkey '^P' zaw-process
+bindkey '^S' zaw-ssh-hosts
+bindkey '^G^B' zaw-git-branches
+bindkey '^G^L' zaw-git-log
+bindkey '^G^S' zaw-git-status
+# bindkey '^G^F' zaw-git-files
 
 ############
 # zsh-autosuggestions

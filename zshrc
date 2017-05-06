@@ -46,7 +46,7 @@ source $ZSH_HOME/conf/color.zsh
 # for library ($ZSH_CUSTOM_LIB/*.zsh); do
 #   source $library
 # done
-source $ZSH_HOME/plugin.zsh
+# source $ZSH_HOME/plugin.zsh
 
 ###
 # 環境依存設定

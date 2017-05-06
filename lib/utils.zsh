@@ -130,6 +130,7 @@ function peco-src() {
 zle -N peco-src
 bindkey '^]' peco-src
 
+# NOTE: replace zaw-ssh-hosts
 function s() {
   ssh $(awk '
     tolower($1)=="host" {
@@ -163,4 +164,5 @@ function peco-git-branch-checkout () {
 }
 zle -N peco-git-branch-checkout
 
-bindkey '^g' peco-git-branch-checkout
+# NOTE: replace zaw-git-branches
+# bindkey '^g' peco-git-branch-checkout
