@@ -2,6 +2,6 @@ history*
 conf/switch_view.zsh
 
 # dotfiles
-.zcompdump
+.zcompdump*
 .chpwd-recent-dirs
 auto-fu*
